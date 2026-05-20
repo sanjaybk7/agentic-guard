@@ -74,6 +74,9 @@ ignore = ["E501"]
 [tool.ruff.lint.per-file-ignores]
 # Intentional non-PEP-8 module name; tests case-sensitivity vs Python's import system.
 "tests/fixtures/src_layout/case_case_sensitive/**" = ["N999"]
+# Fixture vars use uppercase (PROMPT, SYS, X, ...) to mimic real prompt-constant
+# naming; intentional reassignments test the multi-binding-drops-the-name rule.
+"tests/fixtures/function_local/**" = ["N806", "N803", "F811", "F841"]
 
 [tool.mypy]
 python_version = "3.11"
