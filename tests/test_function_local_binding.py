@@ -98,11 +98,22 @@ def test_closure_inner_rebinds_does_not_resolve() -> None:
 
 
 def test_lambda_presence_does_not_crash_analyzer() -> None:
-    """§5 — lambdas can contain no bindings; analyzer must not crash on them.
+    """§5 — lambdas cannot contain statements, so no bindings inside them.
 
-    The Agent in this fixture references a module-level literal (handled
-    by Fix 1). The lambda is structural noise — if the analyzer's
-    function-scope walker crashes on lambda descent, this test catches it.
+    Two distinct guarantees this fixture exercises, separately:
+
+    1. The analyzer does NOT crash during ``scan()`` when lambdas are
+       present in module or function scope. A crash here surfaces as
+       a test error (raised exception) before any assertion runs;
+       this guarantee is verified by the absence of such an exception,
+       not by the assertion below.
+    2. The Agent's reference to a module-level literal is unaffected
+       by lambda presence — Fix 1's module-scope resolution still
+       works around lambda nodes. The assertion below verifies this.
+
+    Each guarantee catches a different bug-mode; the no-crash one is
+    structural (surfaces as test error), the resolution one is
+    behavioral (surfaces as assertion failure).
     """
     rule_ids = _rule_ids(FIXTURES / "lambda_structural.py")
     assert "IG002" not in rule_ids, (
@@ -317,10 +328,30 @@ def test_nonlocal_demotes_outer_binding() -> None:
     )
 
 
-def test_global_routes_to_module_literal_resolves() -> None:
-    """§23 — ``global X`` declaration routes lookup to module scope's literal."""
-    assert "IG002" not in _rule_ids(FIXTURES / "global_routes_to_module.py"), (
-        "§23 global declaration must route to module-scope literal via Fix 1"
+def test_global_with_in_function_write_demotes_module_scope() -> None:
+    """§23 — ``global X`` + in-function write demotes module-scope X to dynamic.
+
+    Rewritten per fixture-matrix review: the previous test only
+    exercised the global-read case (indistinguishable from Fix 1's
+    normal module-scope resolution), under-testing §23.
+
+    Fixture has two functions sharing the same module-scope PROMPT:
+    one reads via ``global``, one writes via ``global``. The write
+    demotes module-scope PROMPT to dynamic (parallel to
+    ``nonlocal_routes_outward``'s outer-scope demotion). Both agents
+    must fire IG002 because PROMPT no longer resolves.
+    """
+    findings = _findings(FIXTURES / "global_routes_to_module.py")
+    ig002 = [f for f in findings if f.rule_id == "IG002"]
+    routed = [f for f in ig002 if "global-routed" in f.message]
+    writes = [f for f in ig002 if "global-writes" in f.message]
+    assert len(routed) == 1, (
+        f"§23 global-routed agent must fire IG002 (module-scope PROMPT "
+        f"demoted by sibling's write); got {len(routed)} findings"
+    )
+    assert len(writes) == 1, (
+        f"§23 global-writes agent must fire IG002 (write demotes the "
+        f"binding it then reads); got {len(writes)} findings"
     )
 
 

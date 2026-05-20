@@ -7,6 +7,9 @@ explicitly deferred in §16. A branch-equivalence walker plus a
 but adds rule complexity not justified by corpus prevalence. This
 fixture documents the deferred decision: any conditional binding,
 including this symmetric case, falls through to dynamic.
+
+The condition is a function parameter (per fixture-matrix review) so
+no static analyzer — present or future — can constant-fold it.
 """
 
 from agents import Agent, function_tool
@@ -17,10 +20,7 @@ def lookup(key: str) -> str:
     return ""
 
 
-cond = True
-
-
-def make_agent():
+def make_agent(cond: bool):
     if cond:
         PROMPT = "both-branches identical literal"
     else:

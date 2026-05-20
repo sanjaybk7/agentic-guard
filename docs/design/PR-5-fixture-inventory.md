@@ -111,11 +111,22 @@ def test_closure_inner_rebinds_does_not_resolve() -> None:
 
 
 def test_lambda_presence_does_not_crash_analyzer() -> None:
-    """§5 — lambdas can contain no bindings; analyzer must not crash on them.
+    """§5 — lambdas cannot contain statements, so no bindings inside them.
 
-    The Agent in this fixture references a module-level literal (handled
-    by Fix 1). The lambda is structural noise — if the analyzer's
-    function-scope walker crashes on lambda descent, this test catches it.
+    Two distinct guarantees this fixture exercises, separately:
+
+    1. The analyzer does NOT crash during ``scan()`` when lambdas are
+       present in module or function scope. A crash here surfaces as
+       a test error (raised exception) before any assertion runs;
+       this guarantee is verified by the absence of such an exception,
+       not by the assertion below.
+    2. The Agent's reference to a module-level literal is unaffected
+       by lambda presence — Fix 1's module-scope resolution still
+       works around lambda nodes. The assertion below verifies this.
+
+    Each guarantee catches a different bug-mode; the no-crash one is
+    structural (surfaces as test error), the resolution one is
+    behavioral (surfaces as assertion failure).
     """
     rule_ids = _rule_ids(FIXTURES / "lambda_structural.py")
     assert "IG002" not in rule_ids, (
@@ -330,10 +341,30 @@ def test_nonlocal_demotes_outer_binding() -> None:
     )
 
 
-def test_global_routes_to_module_literal_resolves() -> None:
-    """§23 — ``global X`` declaration routes lookup to module scope's literal."""
-    assert "IG002" not in _rule_ids(FIXTURES / "global_routes_to_module.py"), (
-        "§23 global declaration must route to module-scope literal via Fix 1"
+def test_global_with_in_function_write_demotes_module_scope() -> None:
+    """§23 — ``global X`` + in-function write demotes module-scope X to dynamic.
+
+    Rewritten per fixture-matrix review: the previous test only
+    exercised the global-read case (indistinguishable from Fix 1's
+    normal module-scope resolution), under-testing §23.
+
+    Fixture has two functions sharing the same module-scope PROMPT:
+    one reads via ``global``, one writes via ``global``. The write
+    demotes module-scope PROMPT to dynamic (parallel to
+    ``nonlocal_routes_outward``'s outer-scope demotion). Both agents
+    must fire IG002 because PROMPT no longer resolves.
+    """
+    findings = _findings(FIXTURES / "global_routes_to_module.py")
+    ig002 = [f for f in findings if f.rule_id == "IG002"]
+    routed = [f for f in ig002 if "global-routed" in f.message]
+    writes = [f for f in ig002 if "global-writes" in f.message]
+    assert len(routed) == 1, (
+        f"§23 global-routed agent must fire IG002 (module-scope PROMPT "
+        f"demoted by sibling's write); got {len(routed)} findings"
+    )
+    assert len(writes) == 1, (
+        f"§23 global-writes agent must fire IG002 (write demotes the "
+        f"binding it then reads); got {len(writes)} findings"
     )
 
 
@@ -667,14 +698,34 @@ def make_agents():
 ### `tests/fixtures/function_local/except_var_not_resolved.py`
 
 ```python
-"""§24 — exception variable ``except Exception as e`` is bound to the
-exception object, never a string. Out of scope for PR #5.
+"""§24 + §17 — exception-handler ``as e`` syntax must not crash the
+analyzer, and bindings in try/except bodies still follow §17 (don't
+resolve).
 
-We do not want to resolve ``e`` to a literal. The fixture also confirms
-the analyzer doesn't crash on ``ast.ExceptHandler.name`` patterns.
+Rewritten per fixture-matrix review: the original fixture passed
+``instructions=e`` (exception object), which was tautologically not a
+string-literal candidate — the assertion would pass regardless of any
+§24 logic. This version makes the test substantive:
+
+* The except body binds a normal PROMPT literal and constructs the
+  Agent with it. Per §17 (try/except body bindings don't resolve),
+  PROMPT must not resolve → IG002 fires.
+* The exception variable ``e`` is bound by ``as e`` and is referenced
+  in the log call, so the binding-extractor genuinely walks past
+  ``ast.ExceptHandler.name``. §24 says ``e`` is bound to the exception
+  object (never a string) and must not be tracked as a literal — that
+  invariant is implicitly verified: if ``e`` were somehow tracked as
+  a literal, downstream resolution would behave incorrectly.
+* The §24 crash-protection invariant: if the analyzer's function-
+  scope walker chokes on ``ast.ExceptHandler``, scan() raises and the
+  test errors before the assertion runs.
 """
 
+import logging
+
 from agents import Agent, function_tool
+
+log = logging.getLogger(__name__)
 
 
 @function_tool
@@ -686,9 +737,11 @@ def make_agent():
     try:
         _ = 1 / 0
     except ZeroDivisionError as e:
+        log.warning("recovered from %r", e)  # e is genuinely referenced
+        PROMPT = "literal in except body"
         return Agent(
             name="except-var",
-            instructions=e,  # type: ignore[arg-type]
+            instructions=PROMPT,
             tools=[lookup],
             model="gpt-4o",
         )
@@ -917,12 +970,31 @@ def make_agent():
 ### `tests/fixtures/function_local/global_routes_to_module.py`
 
 ```python
-"""§23 — ``global X`` declaration routes lookup to module scope; if module
-scope has a single literal, the reference resolves.
+"""§23 — ``global X`` declaration writes through to module scope;
+in-function assignment via ``global`` demotes module-scope's binding
+to dynamic (parallel to ``nonlocal_routes_outward.py``).
 
-Inside ``make_agent``, ``global PROMPT`` declares that PROMPT refers to
-the module-scope binding. No in-function assignment, so module-scope's
-PROMPT stays singly-bound and resolves via Fix 1's ModuleContext.
+Rewritten per fixture-matrix review: the original fixture only
+exercised the global-read case, which was indistinguishable from
+Fix 1's normal module-scope resolution — §23's global branch was
+under-tested.
+
+Two functions in the same fixture:
+
+* ``make_agent_routed`` declares ``global PROMPT`` and reads it. By
+  itself, this is a no-op (Python would resolve module-scope PROMPT
+  with or without the global declaration).
+* ``make_agent_writes`` declares ``global PROMPT`` AND assigns
+  ``PROMPT = "..."``. Per §23's implementation sketch (§5.3 in the
+  design doc): the assignment writes to module scope; module-scope's
+  PROMPT becomes effectively multi-assigned (the module-scope
+  initializer plus this write); the binding is demoted to dynamic.
+
+Both agents reference PROMPT. Both must fire IG002 because the
+module-scope PROMPT no longer resolves once ``make_agent_writes`` has
+demoted it. If §23's demotion logic isn't implemented, ``make_agent_routed``
+silently resolves via Fix 1's module-scope path — and this fixture
+catches that gap.
 """
 
 from agents import Agent, function_tool
@@ -936,10 +1008,28 @@ def lookup(key: str) -> str:
 PROMPT = "module-level literal"
 
 
-def make_agent():
+def make_agent_routed():
+    """Reads module-scope PROMPT via the ``global`` declaration."""
     global PROMPT
     return Agent(
-        name="global-routes-to-module",
+        name="global-routed",
+        instructions=PROMPT,
+        tools=[lookup],
+        model="gpt-4o",
+    )
+
+
+def make_agent_writes():
+    """Writes module-scope PROMPT via the ``global`` declaration.
+
+    This write demotes module-scope PROMPT to dynamic. The Agent
+    constructed here, and also the one constructed by
+    ``make_agent_routed``, lose their resolution.
+    """
+    global PROMPT
+    PROMPT = "rebinding via global declaration"
+    return Agent(
+        name="global-writes",
         instructions=PROMPT,
         tools=[lookup],
         model="gpt-4o",
@@ -958,6 +1048,9 @@ explicitly deferred in §16. A branch-equivalence walker plus a
 but adds rule complexity not justified by corpus prevalence. This
 fixture documents the deferred decision: any conditional binding,
 including this symmetric case, falls through to dynamic.
+
+The condition is a function parameter (per fixture-matrix review) so
+no static analyzer — present or future — can constant-fold it.
 """
 
 from agents import Agent, function_tool
@@ -968,10 +1061,7 @@ def lookup(key: str) -> str:
     return ""
 
 
-cond = True
-
-
-def make_agent():
+def make_agent(cond: bool):
     if cond:
         PROMPT = "both-branches identical literal"
     else:
@@ -991,6 +1081,11 @@ def make_agent():
 
 The value is conditional on the branch taken; static analysis cannot
 know which path executed. Conservative-on-doubt: do not resolve.
+
+The condition is a function parameter (per fixture-matrix review) so
+no static analyzer — present or future — can constant-fold it. The
+conditionality is genuinely opaque, mirroring real conditional bindings
+in production code.
 """
 
 from agents import Agent, function_tool
@@ -1001,10 +1096,7 @@ def lookup(key: str) -> str:
     return ""
 
 
-cond = True
-
-
-def make_agent():
+def make_agent(cond: bool):
     if cond:
         PROMPT = "if-branch literal"
     return Agent(
@@ -1481,6 +1573,9 @@ def make_agent():
 depending on ``cond``'s value. The "single deterministic binding"
 guarantee that justifies resolution is broken; refuse rather than
 reason about evaluation order.
+
+The condition is a function parameter (per fixture-matrix review) so
+no static analyzer — present or future — can constant-fold it.
 """
 
 from agents import Agent, function_tool
@@ -1491,10 +1586,7 @@ def lookup(key: str) -> str:
     return ""
 
 
-cond = True
-
-
-def make_agent():
+def make_agent(cond: bool):
     if cond and (PROMPT := "from boolean-and walrus"):
         return Agent(
             name="walrus-in-boolean",
@@ -1512,6 +1604,9 @@ def make_agent():
 
 The walrus binding only happens when the ternary's selected branch
 executes. PR #5 refuses to reason about evaluation-order conditionals.
+
+The condition is a function parameter (per fixture-matrix review) so
+no static analyzer — present or future — can constant-fold it.
 """
 
 from agents import Agent, function_tool
@@ -1522,10 +1617,7 @@ def lookup(key: str) -> str:
     return ""
 
 
-flag = True
-
-
-def make_agent():
+def make_agent(flag: bool):
     # W is the walrus binding inside the ternary's true branch.
     _ = (W := "from ternary true branch") if flag else None
     return Agent(
