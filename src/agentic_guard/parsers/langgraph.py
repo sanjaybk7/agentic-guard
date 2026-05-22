@@ -78,11 +78,35 @@ class _Visitor(ast.NodeVisitor):
 
     def visit_FunctionDef(self, node: ast.FunctionDef) -> None:
         self._maybe_register_tool(node)
-        self.generic_visit(node)
+        self._enter_function_scope(node)
+        try:
+            self.generic_visit(node)
+        finally:
+            self._exit_function_scope(node)
 
     def visit_AsyncFunctionDef(self, node: ast.AsyncFunctionDef) -> None:
         self._maybe_register_tool(node)
-        self.generic_visit(node)
+        self._enter_function_scope(node)
+        try:
+            self.generic_visit(node)
+        finally:
+            self._exit_function_scope(node)
+
+    # §4a: try/finally bracketing guarantees the scope stack unwinds
+    # cleanly even if generic_visit raises mid-function, so a sibling
+    # function visited next cannot inherit a polluted stack.
+    def _enter_function_scope(
+        self, node: ast.FunctionDef | ast.AsyncFunctionDef
+    ) -> None:
+        scope = self.module_ctx.function_scopes.get(id(node))
+        if scope is not None:
+            self.module_ctx.function_stack.append(scope)
+
+    def _exit_function_scope(
+        self, node: ast.FunctionDef | ast.AsyncFunctionDef
+    ) -> None:
+        if id(node) in self.module_ctx.function_scopes and self.module_ctx.function_stack:
+            self.module_ctx.function_stack.pop()
 
     def _maybe_register_tool(self, node: ast.FunctionDef | ast.AsyncFunctionDef) -> None:
         decorator = self._find_tool_decorator(node)
