@@ -37,7 +37,7 @@ implementation inherits from its design choices.
 | Static analysis (design-time) | `agentic-guard`, GitHub CodeQL custom packs | Architectural patterns: source+sink toolboxes, dynamic prompts, unprotected privileged sinks | **This is us.** |
 | Runtime classifier (in-band) | Lakera, NeMo Guardrails, Prompt Armor | Specific payloads in inbound or outbound prompts | Complementary; we surface designs that *can* be attacked, they block specific attacks at the moment |
 | Runtime sandbox (in-band) | LlamaFirewall, Microsoft Prompt Shields | Tool-call gating, capability enforcement | Complementary; we make sure the architecture is gateable, they enforce the gates |
-| Formal verification (proof-time) | Active research (TAINTAWI and successors) | Provable absence of taint flows | Future work; static analysis is the practical compromise today |
+| Formal verification (proof-time) | Active research (TaintAWI and successors) | Provable absence of taint flows | Future work; static analysis is the practical compromise today |
 | Human-in-the-loop (UX) | Human review of high-stakes tool calls | Whatever the human catches | Orthogonal; we surface which sinks need human gates |
 
 The point: **no single layer is sufficient.** A well-defended agent
@@ -397,7 +397,7 @@ file as security-sensitive in your VCS (require reviews on changes).
 |---|---|---|
 | **OWASP LLM Top 10** (2025 edition) | Application-level LLM risks: LLM01 (prompt injection), LLM02 (insecure output handling), LLM06 (sensitive info disclosure), LLM07 (insecure plugin design), LLM08 (excessive agency) | We catch LLM01, LLM06, LLM07, LLM08 patterns at design-time. Not all instances; not exhaustively. |
 | **Meta LlamaFirewall** | Runtime sandbox for tool calls: argument scrubbing, capability enforcement, output redaction | Complementary. We surface designs that *can* be sandboxed; they enforce the sandbox at runtime. |
-| The **formal taint-analysis line of research** for agentic workflows (TAINTAWI and successors) | Provable absence of taint flows in LLM-agent code using SMT-style techniques | Aspirational. We approximate the same intent with a fast static check; formal methods prove; we surface. |
+| **TaintAWI** (Wang et al., arXiv:2605.07135, 2026) and the formal taint-analysis line of research for agentic workflows | TaintAWI targets GitHub Actions workflow YAML; same taint-analysis technique applied to CI/CD agent pipelines rather than SDK code. Adjacent domain: we target agent SDK code (OpenAI Agents, LangGraph, CrewAI), they target workflow orchestration files. | Same underlying technique (taint propagation from untrusted source to privileged sink); different artifact under analysis. Complementary coverage. |
 | **Microsoft Prompt Shields** | Classifier-based input/output filtering | Different layer. They catch payloads at runtime; we catch architectures that admit payloads at design time. |
 | **Simon Willison's prompt-injection writing** (informal canonical reference) | Conceptual framing of indirect prompt injection as the dominant LLM-security failure mode | We operationalize the framing into static checks. The "Markdown image exfil" example from his blog is a direct case our IG001 catches when the relevant tool is in scope. |
 
@@ -444,9 +444,10 @@ version of this document.
   systems framing this analyzer's IG001 rule descends from.
 - **Simon Willison's prompt-injection writing:**
   <https://simonwillison.net/tags/prompt-injection/>
-- **The formal taint-analysis line of research for agentic workflows**
-  (TAINTAWI and successors): provable absence of taint flows in
-  LLM-agent code.
+- **TaintAWI:** Shenao Wang, Xinyi Hou, Zhao Liu, Yanjie Zhao, Xiao Cheng,
+  Quanchen Zou, Xiangzheng Zhang, and Haoyu Wang. "Demystifying and Detecting
+  Agentic Workflow Injection Vulnerabilities in GitHub Actions."
+  arXiv:2605.07135, 2026. <https://arxiv.org/abs/2605.07135>
 - **Meta LlamaFirewall (paper + release):** runtime sandboxing for
   agent tool calls.
 - **`docs/HOW_IT_WORKS.md`:** the analyzer's architecture, rule design,
