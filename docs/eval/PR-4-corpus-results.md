@@ -30,7 +30,7 @@ and PR #4 — same SHAs, same file trees, only the analyzer changed.
 | langchain-academy | 0 | 0 | 0 | 0 | unchanged |
 | open_deep_research | 0 | 0 | 0 | 0 | unchanged |
 | agents-towards-production | 3 | 3 | 3 | 0 | unchanged |
-| openai-cookbook | 13 | 13 | 13 | 0 | unchanged — residuals are function-local-literal-binding FPs that PR #5 targets |
+| openai-cookbook | 13 | 13 | 13 | 0 | unchanged — residuals are `load_prompt(...)` runtime file-load calls, correctly classified as findings, not FPs (see PR-5 corpus doc) |
 | langchain (sparse) | 0 | 0 | 0 | 0 | unchanged |
 | **TOTAL** | **25** | **31** | **25** | **−6** | |
 
@@ -52,27 +52,35 @@ across PR #1, PR #2, and PR #4 scans.
 
 ## What the residual ~25 IG002 are
 
-Per the spot-inspection during PR #2 (recorded in §4.7 of the design
-doc), the residual breaks down approximately as:
+Per-finding inspection was completed during the PR #5 corpus A/B. The
+full per-finding table is in `docs/eval/PR-5-corpus-results.md`. Summary:
 
-- **~1 confirmed true positive** in `openai-agents-python` — the
-  `{repo}` f-string interpolation in `examples/hosted_mcp/simple.py`
-  (function-parameter interpolation into the system prompt; real
-  dynamic-prompt risk).
-- **~16 function-local-literal-binding false positives** across
-  `openai-agents-python`, `openai-cookbook`, `agents-towards-production`,
-  `GenAI_Agents`. These match the pattern PR #5 (function-local
-  binding) explicitly targets — `instructions = (...)\nAgent(
-  instructions=instructions, ...)` where the local var is bound to an
-  implicit-concat string literal.
-- **A few requiring re-inspection** under the post-PR-#4 numbers
-  (specifically the `prompt_server/main.py:63` case where
-  `instructions` is set above as an MCP-server-returned prompt — TP or
-  FP depends on the MCP server's trust posture).
+- **True positives (parameter interpolation):** `{repo}` in
+  `examples/hosted_mcp/simple.py:14`, `{directory_path}` in
+  `examples/mcp/git_example/main.py:12`, `{step}` in
+  `examples/memory/hitl_session_scenario.py:80` — real dynamic-prompt
+  risk; IG002 correct.
+- **True positives (`dedent(...)`):** `BENEFITS_PROMPT`,
+  `ORCHESTRATOR_PROMPT`, `MEMORY_PROMPT` in
+  `examples/sandbox/healthcare_support/support_agents.py` — `dedent()`
+  is a function call; the prompt value is not statically knowable.
+- **Ambiguous:** `examples/mcp/prompt_server/main.py:63` — `instructions`
+  from an MCP call result; TP or FP depends on MCP server trust posture.
+- **1 confirmed function-local-literal FP:** `examples/memory/file_hitl_example.py:50`
+  — `instructions` bound to an implicit-concat string literal in function
+  scope. Resolved by PR #5.
+- **`openai-cookbook` (13):** `load_prompt(...)` runtime file-load calls —
+  correctly classified as findings; prompts are not statically knowable.
+- **`agents-towards-production` (3):** `ChatPromptTemplate` /
+  `MessagesPlaceholder` LangGraph template objects — not string literals.
+- **`GenAI_Agents` (2):** `self.X` class-attribute patterns — out of scope
+  per design decision §3.
 
-Per-finding TP/FP/AMBIGUOUS labels belong to a future precision
-measurement, not to this PR's acceptance. Full corpus precision will
-be re-measured after PR #5 and reported in the v0.2 release notes.
+> **[Corrected]** An earlier revision of this document estimated
+> "~16 function-local-literal-binding false positives" here. That estimate
+> was category-level and unverified; it was not backed by per-finding
+> inspection. The per-finding inspection above found the real count to be
+> **1**. See `docs/eval/PR-5-corpus-results.md` for the full reconciliation.
 
 ## Cumulative deltas across PR #1, PR #2, PR #4
 
