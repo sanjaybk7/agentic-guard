@@ -7,6 +7,10 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from pathlib import Path
 
+from agentic_guard.analysis.function_scope import (
+    FunctionScope,
+    build_function_scope_tree,
+)
 from agentic_guard.analysis.symbol_table import (
     CrossModuleResolver,
     PackageSymbolTable,
@@ -171,14 +175,49 @@ class ModuleContext:
     ``cross_module`` is set when the engine is scanning a directory and was
     able to build a global symbol table; it lets Name lookups continue across
     file boundaries when they fail locally.
+
+    ``function_scopes`` and ``function_stack`` together implement PR #5's
+    function-local literal binding (see ``analysis/function_scope.py``).
+    The visitor pushes a FunctionScope on enter and pops on exit;
+    ``name_resolves_to_static`` walks the stack innermost-first (§4
+    closures, §25/§26 shadowing) before falling through to module-local
+    and cross-module resolution.
     """
 
     string_constants: dict[str, ast.Constant] = field(default_factory=dict)
     function_defs: set[str] = field(default_factory=set)
     cross_module: CrossModuleResolver | None = None
+    function_scopes: dict[int, FunctionScope] = field(default_factory=dict)
+    function_stack: list[FunctionScope] = field(default_factory=list)
 
     def name_resolves_to_static(self, name: str) -> bool:
-        """Local first, then cross-module — matches Python's LEGB-ish shadowing."""
+        """LEGB walk: function-stack innermost-first, then module-local, then cross-module.
+
+        Honors §23 nonlocal/global routing: ``nonlocal X`` skips the
+        current frame; ``global X`` jumps directly to module scope.
+        Honors Python's "assignment makes the name local" shadowing:
+        if a frame has ``name`` in ``locally_bound`` (even without a
+        resolvable binding due to §21 multi-assign drop), the walk
+        stops there — falling through to an enclosing scope would
+        contradict Python's runtime semantics.
+        """
+        for frame in reversed(self.function_stack):
+            if name in frame.global_names:
+                # §23: global routes straight to module; skip remaining frames.
+                return self._resolves_at_module(name)
+            if name in frame.nonlocal_names:
+                # §23: nonlocal skips current frame and continues outward.
+                continue
+            if name in frame.bindings:
+                return True
+            if name in frame.locally_bound:
+                # Python-shadowing: name is local to this frame (even if
+                # we couldn't resolve its value). Do NOT walk further out.
+                return False
+            # Not locally bound here: continue walking outward.
+        return self._resolves_at_module(name)
+
+    def _resolves_at_module(self, name: str) -> bool:
         if name in self.string_constants or name in self.function_defs:
             return True
         if self.cross_module is not None and self.cross_module.resolves_to_static(name):
@@ -190,10 +229,19 @@ def collect_module_context(
     tree: ast.Module,
     cross_module: CrossModuleResolver | None = None,
 ) -> ModuleContext:
-    """Walk top-level statements to record string-constant assignments and function defs.
+    """Walk top-level statements to record module facts, then build the
+    function-scope tree.
 
-    We only look at module-scope assignments, since constants used as prompts are
-    overwhelmingly defined at module scope. Walking deeper introduces noise.
+    Module-scope: ``NAME = "literal"`` and ``def NAME`` at top level go
+    into ``string_constants`` / ``function_defs``. Cross-module
+    resolution is unchanged from Fix 1.
+
+    Function-scope: after module-scope is populated,
+    ``build_function_scope_tree`` walks all FunctionDefs (recursively)
+    and may demote module-scope entries (§23 global writes) before the
+    visitor ever runs. This is why the demotion is visible to sibling
+    functions that read PROMPT before the writing function in source
+    order.
     """
     ctx = ModuleContext(cross_module=cross_module)
     for stmt in tree.body:
@@ -216,6 +264,9 @@ def collect_module_context(
             ann_value = stmt.value
             if isinstance(ann_value, ast.Constant) and isinstance(ann_value.value, str):
                 ctx.string_constants[stmt.target.id] = ann_value
+    # Build function-scope tree (PR #5). Must come after module-scope
+    # population so §23 global-write demotions hit the right map.
+    ctx.function_scopes = build_function_scope_tree(tree, ctx)
     return ctx
 
 

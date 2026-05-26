@@ -6,6 +6,10 @@ source files — imports, module-level constants, dotted module paths — that
 parsers consume to disambiguate framework-specific patterns.
 """
 
+from agentic_guard.analysis.function_scope import (
+    FunctionScope,
+    build_function_scope_tree,
+)
 from agentic_guard.analysis.symbol_table import (
     CrossModuleResolver,
     ModuleSymbols,
@@ -19,10 +23,12 @@ from agentic_guard.analysis.symbol_table import (
 
 __all__ = [
     "CrossModuleResolver",
+    "FunctionScope",
     "ModuleSymbols",
     "PackageSymbolTable",
     "Symbol",
     "SymbolKind",
+    "build_function_scope_tree",
     "discover_package_roots",
     "file_to_module_path",
     "resolve_relative_module_path",
