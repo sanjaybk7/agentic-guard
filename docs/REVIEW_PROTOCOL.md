@@ -105,6 +105,31 @@ their fetch tool.
   Cache-busting at the URL level can't help; the fix is tool-level
   cache invalidation or tool restart.
 
+## Anti-fabrication rule for quantitative claims
+
+Every number stated as a fact in an eval or design doc must satisfy one of
+two conditions:
+
+**1. Backed by a reproducible command.** A command that any reader can run
+to reproduce the count is cited inline or in the document's Artifacts
+section. Examples: `grep -c "^def test_" tests/…`, the `--collect-only`
+pytest output, a per-repo scan table. No number is stated as a verified
+count unless that command exists and produces it.
+
+**2. Explicitly labeled as an estimate.** Use `~` prefix and/or explicit
+language: "estimate," "projected," "not verified per-finding." An estimate
+may later be superseded by a measured result; when it is, the document must
+state the original estimate, the measured result, and the reason for the gap.
+
+**No number is stated as a fact without a command that produces it.**
+Category-level estimates that get cited in later documents as verified
+counts are a known failure mode in this project's history (see the ~16/~8
+function-local FP projection, corrected in
+`docs/eval/PR-5-corpus-results.md`). When a number graduates from
+"estimate" to "measured," the document must reflect that explicitly.
+
+---
+
 ## When the protocol fails
 
 If even commit-SHA URLs are serving stale content on the reviewer's
