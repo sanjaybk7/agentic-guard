@@ -105,7 +105,14 @@ than totals."
 - `/tmp/ag_eval/results_v01.json` — v0.1 baseline
 - `/tmp/ag_eval/results_v02.json` — Fix 1 only
 
-Cumulative IG002 reduction once PR #5 (function-local literal binding)
-lands is projected at ~16 from the current 25, leaving ~9 residual.
-That projection will be measured, not asserted, when PR #5's corpus
-A/B is run.
+The PR #4 doc estimated a ~16 IG002 reduction once PR #5 landed, based on a
+category-level count of "function-local-literal-binding FPs" across four
+repos. **That estimate was wrong.** Per-finding inspection during the PR #5
+corpus A/B (see `docs/eval/PR-5-corpus-results.md`) found that most of those
+findings were not function-local string literals: `openai-cookbook`'s 13 are
+`load_prompt(...)` calls, `agents-towards-production`'s 3 are LangGraph
+template objects, `GenAI_Agents`'s 2 are `self.X` class-attribute patterns
+(§3 carve-out), and `openai-agents-python`'s `dedent(...)` findings are
+function calls per Python's AST. Only 1 confirmed function-local-literal FP
+existed in the corpus; PR #5 resolved it. The actual reduction is −1
+(drift-adjusted).

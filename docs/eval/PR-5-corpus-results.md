@@ -7,6 +7,25 @@ by macOS); see the Corpus drift section below for implications.
 
 ---
 
+## Prediction (stated before scan)
+
+The PR #4 corpus doc projected a reduction of **~16** IG002 findings once
+PR #5 landed, based on a category-level estimate of "~16 function-local-
+literal-binding false positives" across four repos. That estimate was
+**never verified at the per-finding level** — the PR #4 doc explicitly
+deferred per-finding inspection to a future precision measurement.
+
+**Actual result: −1 confirmed FP fixed (drift-adjusted).**
+
+The projection was wrong from the start. See the per-finding reconciliation
+below.
+
+Note: the PR #5 corpus doc previously stated the projection as "~8," which
+does not appear in any prior doc and is inconsistent with the PR #4 doc's
+"~16." Both numbers were wrong; "~8" is corrected here and removed.
+
+---
+
 ## Per-repo IG002 deltas (PR #4 baseline → PR #5)
 
 | Repo | PR #4 IG002 | PR #5 IG002 | Δ | Notes |
@@ -29,7 +48,7 @@ by macOS); see the Corpus drift section below for implications.
 The PR #5 scan is **not a clean A/B comparison** against the PR #4 scan.
 The `/tmp/ag_eval/` workspace was purged by macOS between the two scans,
 forcing a full re-clone. The re-cloned repos are at their current HEAD,
-which for `openai-agents-python` is commit `fedc809` —  more recent than
+which for `openai-agents-python` is commit `fedc809` — more recent than
 the clone used for PR #4.
 
 Inspection of the 9 PR #5 findings in `openai-agents-python` shows:
@@ -52,57 +71,96 @@ And critically, **this finding from PR #4 is absent from the PR #5 scan**:
 |---|---|---|
 | `examples/memory/file_hitl_example.py:50` | `instructions` — function-local literal binding | **FIXED by PR #5** |
 
-### What this means
-
-PR #5 fixed the one confirmed function-local-literal-binding FP in the corpus:
-`file_hitl_example.py:50` used the pattern
-```python
-instructions = (
-    "You assist support agents. ..."
-    "...keep responses under three sentences."
-)
-agent = Agent(name="...", instructions=instructions, ...)
-```
-where `instructions` is a function-local variable bound to an
-implicit-concat string literal. After PR #5, `instructions` resolves as a
-static literal → IG002 is silent.
-
-The headline count went **+2** (not the −8 originally projected), because:
+The headline count went **+2** (not the projected −16), because:
 * −1: the `file_hitl_example.py` FP was fixed (PR #5 working correctly)
-* +3: corpus drift — the re-cloned repo at a newer HEAD introduced two
-  entirely new example files (`capabilities.py`, `apply_patch.py`) and a
-  new finding in `support_agents.py` (the PR #4 clone had only 2
-  `support_agents.py` findings; the new clone has 3, suggesting the SDK
-  added a third `Agent[T](...)` definition with a `dedent(...)` prompt
-  between the two clones)
+* +3: corpus drift — the re-cloned repo introduced two new example files
+  (`capabilities.py`, `apply_patch.py`) and a third `support_agents.py`
+  finding not present in the PR #4 clone
 
-**Corpus-drift-adjusted net:** −1 IG002 (one confirmed FP resolved).
+**Corpus-drift-adjusted net: −1 IG002 (one confirmed FP resolved).**
 
 ---
 
-## Why the projected −8 FP reduction wasn't observed
+## Per-finding reconciliation of the projected −16
 
-The PR #1/PR #2 analysis estimated ~8 function-local-literal-binding FPs
-in the corpus. Spot-inspection of the actual findings in the PR #4 corpus
-showed:
+The PR #4 doc classified findings in four repos as "function-local-literal-
+binding false positives" without individual inspection. Here is what each
+finding actually is.
 
-* `agents-towards-production` (3 findings): `ChatPromptTemplate` and
-  `MessagesPlaceholder` LangGraph prompt patterns in notebooks — not
-  function-local literals.
-* `GenAI_Agents` (2 findings): `self.X` attribute patterns — out of scope
-  for PR #5 (§3 carve-out).
-* `openai-cookbook` (13 findings): function-call-result prompts
-  (`load_prompt(...)`) — the prompts are loaded from files at runtime,
-  not bound to literals in function scope.
-* `openai-agents-python` (7 findings in PR #4 scan): only 1 confirmed
-  function-local-literal FP (`file_hitl_example.py`); the rest were TPs
-  or `dedent("""...""")` patterns (which are function calls, not literals,
-  per Python's AST).
+### openai-agents-python — 7 findings at PR #4 baseline
 
-The gap between the projection (~8) and the observation (1) reflects the
-same phenomenon as PR #1's corpus surprise: the corpus used for validation
-happens not to have many of the targeted patterns. The fix is correct;
-the corpus doesn't surface it at scale.
+| File:line | Actual classification | PR #5 resolves? | Reason |
+|---|---|---|---|
+| `examples/hosted_mcp/simple.py:14` | TP — `{repo}` f-string parameter interpolation | N/A | Real dynamic-prompt risk |
+| `examples/mcp/git_example/main.py:12` | TP — `{directory_path}` parameter interpolation | N/A | Real dynamic-prompt risk |
+| `examples/mcp/prompt_server/main.py:63` | Ambiguous — `instructions` from MCP call result | No | RHS is a function call result, not a literal |
+| `examples/memory/hitl_session_scenario.py:80` | TP — `{step}` parameter interpolation | N/A | Real dynamic-prompt risk |
+| `examples/sandbox/healthcare_support/support_agents.py:94` | TP — `BENEFITS_PROMPT` from `dedent(...)` | No | `dedent(...)` is a function call; RHS is not a literal per Python AST |
+| `examples/sandbox/healthcare_support/support_agents.py:139` | TP — `ORCHESTRATOR_PROMPT` from `dedent(...)` | No | Same |
+| `examples/sandbox/healthcare_support/support_agents.py:159` | TP — `MEMORY_PROMPT` from `dedent(...)` | No | Same; this finding appeared in re-clone only |
+| `examples/memory/file_hitl_example.py:50` | **FP — confirmed function-local-literal binding** | **Yes — fixed** | `instructions` bound to implicit-concat string literal in function scope |
+
+**Genuine function-local-literal FPs in this repo: 1 of 7. PR #5 fixed it.**
+
+### openai-cookbook — 13 findings
+
+These were counted in the ~16 estimate as function-local-literal FPs. On
+inspection, all 13 are `load_prompt(...)` calls — the prompts are loaded
+from files at runtime. The RHS is a function call result, not a string
+literal. PR #5 does not resolve these, and should not: they are correctly
+classified as findings (the prompt value is not statically knowable).
+
+**Genuine function-local-literal FPs in this repo: 0 of 13.**
+
+### agents-towards-production — 3 findings
+
+These were counted in the ~16 estimate. On inspection, all 3 are
+`ChatPromptTemplate` and `MessagesPlaceholder` LangGraph prompt objects —
+not string literals and not function-local binding in the sense PR #5
+targets. PR #5 does not resolve these.
+
+**Genuine function-local-literal FPs in this repo: 0 of 3.**
+
+### GenAI_Agents — 2 findings
+
+These were counted in the ~16 estimate. On inspection, both are `self.X`
+class-attribute patterns — explicitly carved out by design decision §3.
+They were never in scope for PR #5.
+
+**Genuine function-local-literal FPs in this repo: 0 of 2.**
+
+### Summary
+
+| Repo | Findings in ~16 estimate | Genuine function-local-literal FPs | Fixed by PR #5 |
+|---|---:|---:|---:|
+| `openai-agents-python` | ~2 (support_agents dedent + file_hitl) | 1 | 1 |
+| `openai-cookbook` | ~13 | 0 | 0 |
+| `agents-towards-production` | ~3 | 0 | 0 |
+| `GenAI_Agents` | ~2 | 0 | 0 |
+| **Total** | **~16** | **1** | **1** |
+
+---
+
+## Honest conclusion: the projection was wrong from the start (conclusion a)
+
+The ~16 estimate in the PR #4 doc was a category-level claim made without
+inspecting individual findings. The findings that were labelled
+"function-local-literal-binding false positives" turned out on per-finding
+inspection to be:
+
+- Runtime function-call results (`load_prompt(...)`, `dedent(...)`) — not
+  literals by Python's AST definition
+- Class-attribute patterns (`self.X`) — explicitly out of scope per §3
+- LangGraph template objects — not string literals at all
+
+PR #5's implementation is **not buggy**. It correctly resolved the one
+genuine function-local-literal FP in the corpus. The gap between the
+projected −16 (or "~8," a further inconsistency introduced without a
+source) and the observed −1 is entirely explained by misclassification in
+the original estimate.
+
+The correct correction to the design doc's projection: the corpus contained
+**1 confirmed function-local-literal FP**. PR #5 resolved it.
 
 ---
 
@@ -115,8 +173,7 @@ exact commit SHAs for each repo in the evaluation YAML (per the Fix 5
 roadmap item in the original v0.2 brief). Without pinned SHAs, any
 per-PR IG002 delta has an unquantifiable corpus-drift component.
 
-The 8 repos that showed 0 delta are unaffected by this concern — they
-are stable regardless of drift.
+The 8 repos that showed 0 delta are unaffected by this concern.
 
 ---
 
@@ -143,4 +200,4 @@ implemented rules (IG003 library-call sinks, IG004 disclosure, the
 
 * `/tmp/ag_eval/results_pr5.json` — full per-repo JSON output from this scan
 * `/tmp/ag_eval/results_pr4.json` — was purged along with the workspace;
-  PR #4's numbers above are from memory / `docs/eval/PR-4-corpus-results.md`
+  PR #4's numbers above are from `docs/eval/PR-4-corpus-results.md`
