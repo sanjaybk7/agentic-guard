@@ -83,67 +83,46 @@ def _check_freeze() -> str:
 
 def scan_repo(repo_path: Path, full_name: str, repo_sha: str) -> tuple[list[dict], str | None]:
     """Run agentic-guard on a repo. Returns (findings, error_msg)."""
+    import re as _re  # noqa: PLC0415
     try:
-        result = subprocess.run(
-            [sys.executable, "-m", "agentic_guard", "scan", str(repo_path), "--format", "json"],
-            capture_output=True,
-            text=True,
-            timeout=120,
-        )
-    except subprocess.TimeoutExpired:
-        return [], "scan timed out after 120s"
+        from agentic_guard.engine import Scanner  # noqa: PLC0415
+        result = Scanner().scan(repo_path)
+    except TimeoutError:
+        return [], "scan timed out"
     except Exception as exc:
-        return [], f"subprocess error: {exc}"
+        return [], f"scan error: {exc}"
 
-    if result.returncode not in (0, 1):
-        # returncode 1 = findings present (normal); others = error
-        stderr_snippet = result.stderr[:400] if result.stderr else "(no stderr)"
-        return [], f"scan exited {result.returncode}: {stderr_snippet}"
-
-    if not result.stdout.strip():
-        return [], None  # clean scan, no findings
-
-    try:
-        raw = json.loads(result.stdout)
-    except json.JSONDecodeError as exc:
-        return [], f"JSON parse error: {exc}"
-
-    findings_list: list[dict] = raw if isinstance(raw, list) else raw.get("findings", [])
     rows: list[dict] = []
-    for f in findings_list:
-        rule_id = f.get("rule_id", "")
-        location = f.get("location", {})
-        related = f.get("related_locations", [{}])
+    for f in result.findings:
+        rule_id = f.rule_id
+        loc = f.location
 
         source_tool = ""
         sink_tool = ""
-        agent_name = f.get("agent_name") or ""
+        agent_name = getattr(f, "agent_name", "") or ""
         prompt_expr = ""
 
         if rule_id == "IG001":
-            # Extract source/sink from related_locations or message parse
-            msg = f.get("message", "")
-            # Message format: "Agent `X` exposes an untrusted source `Y` and a privileged sink `Z`..."
-            import re
-            src_m = re.search(r"untrusted source `([^`]+)`", msg)
-            snk_m = re.search(r"privileged sink `([^`]+)`", msg)
+            msg = f.message
+            src_m = _re.search(r"untrusted source `([^`]+)`", msg)
+            snk_m = _re.search(r"privileged sink `([^`]+)`", msg)
             source_tool = src_m.group(1) if src_m else ""
             sink_tool = snk_m.group(1) if snk_m else ""
         elif rule_id == "IG002":
-            prompt_expr = ", ".join(f.get("taint_sources", [])) or ""
+            prompt_expr = ", ".join(getattr(f, "taint_sources", []) or [])
 
         rows.append({
             "repo_full_name": full_name,
             "repo_sha": repo_sha,
-            "file_path": location.get("file", ""),
-            "line": location.get("line", ""),
+            "file_path": str(loc.file) if loc else "",
+            "line": loc.line if loc else "",
             "rule_id": rule_id,
-            "severity": f.get("severity", ""),
+            "severity": f.severity.value if hasattr(f.severity, "value") else str(f.severity),
             "agent_name": agent_name,
             "source_tool": source_tool,
             "sink_tool": sink_tool,
             "prompt_expr": prompt_expr,
-            "raw_message": f.get("message", "")[:300],
+            "raw_message": f.message[:300],
             "label": "",
             "notes": "",
         })

@@ -6,7 +6,9 @@
     "sha": "7679f21edf3f625f89c2a6e41cf2c4931d26f6eb",
     "framework_tag": "langgraph",
     "stars": 70652,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 5,
+    "py_file_count": 540
   },
   {
     "full_name": "langchain-ai/deepagents",
@@ -15,7 +17,9 @@
     "sha": "c160ea3eeda1d0ba707bb524cfd0ce087a854e08",
     "framework_tag": "langgraph",
     "stars": 24102,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 5,
+    "py_file_count": 589
   },
   {
     "full_name": "MODSetter/SurfSense",
@@ -24,7 +28,9 @@
     "sha": "61adc80615bbfc853c3c5116386fe4f47685f07a",
     "framework_tag": "langgraph",
     "stars": 14417,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 7,
+    "py_file_count": 1609
   },
   {
     "full_name": "JoshuaC215/agent-service-toolkit",
@@ -33,7 +39,9 @@
     "sha": "5b3945f48e41a193816d7710b275eb89b90568ee",
     "framework_tag": "langgraph",
     "stars": 4316,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 14,
+    "py_file_count": 70
   },
   {
     "full_name": "PurpleAILAB/Decepticon",
@@ -42,7 +50,9 @@
     "sha": "b5fa553b69b68203fe69c30f33b44a6b6cc4a6a0",
     "framework_tag": "langgraph",
     "stars": 4295,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 20,
+    "py_file_count": 564
   },
   {
     "full_name": "pipeshub-ai/pipeshub-ai",
@@ -51,7 +61,9 @@
     "sha": "18c880291ceb3b57f1a3cafee8e3f4846b64b363",
     "framework_tag": "langgraph",
     "stars": 2962,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 4,
+    "py_file_count": 1430
   },
   {
     "full_name": "minitap-ai/mobile-use",
@@ -60,7 +72,9 @@
     "sha": "e1d31abcda5c4b712c5c58ecbc128b581859598b",
     "framework_tag": "langgraph",
     "stars": 2580,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 108
   },
   {
     "full_name": "OpenDCAI/Paper2Any",
@@ -69,7 +83,9 @@
     "sha": "b3aac421924c0485d252d6522000264fed4f3ea2",
     "framework_tag": "langgraph",
     "stars": 2565,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 2,
+    "py_file_count": 315
   },
   {
     "full_name": "wassim249/fastapi-langgraph-agent-production-ready-template",
@@ -78,7 +94,9 @@
     "sha": "d97f375a07f140a640838b3bd52d9c3a6ba7b462",
     "framework_tag": "langgraph",
     "stars": 2366,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 44
   },
   {
     "full_name": "guy-hartstein/company-research-agent",
@@ -87,7 +105,9 @@
     "sha": "8497fa8e2d8f74214cea0177dd6cb63919aa7c6e",
     "framework_tag": "langgraph",
     "stars": 1958,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 25
   },
   {
     "full_name": "didilili/ai-agents-from-zero",
@@ -96,7 +116,9 @@
     "sha": "7b369ea60125ea275e0880f3a3dd54214a86c9b8",
     "framework_tag": "langgraph",
     "stars": 1768,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 12,
+    "py_file_count": 127
   },
   {
     "full_name": "starpig1129/DATAGEN",
@@ -105,7 +127,9 @@
     "sha": "db0b018899cb301b9e3dfe8a9d34494dddc67d47",
     "framework_tag": "langgraph",
     "stars": 1745,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 10,
+    "py_file_count": 46
   },
   {
     "full_name": "langchain-ai/langgraph-swarm-py",
@@ -114,7 +138,9 @@
     "sha": "de22626e30844858b5eec1bb6d5a14008db8b773",
     "framework_tag": "langgraph",
     "stars": 1504,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 8,
+    "py_file_count": 11
   },
   {
     "full_name": "neural-maze/philoagents-course",
@@ -123,7 +149,9 @@
     "sha": "b88d7731f5d8ac5a00c05430798f35c03402e4ce",
     "framework_tag": "langgraph",
     "stars": 1499,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 42
   },
   {
     "full_name": "vstorm-co/full-stack-ai-agent-template",
@@ -132,16 +160,20 @@
     "sha": "07a8cd44911faaa80c93bc6120f64159752e1b5e",
     "framework_tag": "langgraph",
     "stars": 1336,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 571
   },
   {
     "full_name": "JudgmentLabs/judgeval",
     "clone_url": "https://github.com/JudgmentLabs/judgeval.git",
     "default_branch": "main",
     "sha": "4ac5f0e56bccc517bc478664f06dc75566b7985e",
-    "framework_tag": "langgraph",
+    "framework_tag": "unknown",
     "stars": 1036,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 260
   },
   {
     "full_name": "aegra/aegra",
@@ -150,7 +182,9 @@
     "sha": "3d803a094f3409418b1c7e088314424f0eaa2fdb",
     "framework_tag": "langgraph",
     "stars": 965,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 316
   },
   {
     "full_name": "souvikmajumder26/Multi-Agent-Medical-Assistant",
@@ -159,7 +193,9 @@
     "sha": "dee00a4df4d7142186c30bf2893406a0074faa51",
     "framework_tag": "langgraph",
     "stars": 903,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 23
   },
   {
     "full_name": "zamalali/DeepGit",
@@ -168,7 +204,9 @@
     "sha": "c61bf33cddf29d0f8065ad4f786fbd6570ca6d9b",
     "framework_tag": "langgraph",
     "stars": 879,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 37
   },
   {
     "full_name": "FunnyWolf/agentic-soc-platform",
@@ -177,7 +215,9 @@
     "sha": "81ce96b4b3676f4acdf27237ccc3af314c416e11",
     "framework_tag": "langgraph",
     "stars": 844,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 109
   },
   {
     "full_name": "Haohao-end/openagent",
@@ -186,7 +226,9 @@
     "sha": "7eb57fde0306504bd5f0c22aace4292c0cfc0c8e",
     "framework_tag": "langgraph",
     "stars": 819,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 597
   },
   {
     "full_name": "FareedKhan-dev/production-grade-agentic-system",
@@ -195,7 +237,9 @@
     "sha": "20def050e099d12c079f501aa6e85b48fe8783bc",
     "framework_tag": "langgraph",
     "stars": 816,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 34
   },
   {
     "full_name": "agentscope-ai/agentscope-runtime",
@@ -204,7 +248,9 @@
     "sha": "22072fd7075ce0c6f43cb39509d6a14b0e60ddb5",
     "framework_tag": "langgraph",
     "stars": 809,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 1,
+    "py_file_count": 389
   },
   {
     "full_name": "xark-argo/argo",
@@ -213,7 +259,9 @@
     "sha": "615e92152915ad9ad24005e643507780369bec55",
     "framework_tag": "langgraph",
     "stars": 779,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 2,
+    "py_file_count": 309
   },
   {
     "full_name": "langchain-ai/react-agent",
@@ -222,7 +270,9 @@
     "sha": "d89d249c2a768e8b166c7c4e3bfeff2c73acb00f",
     "framework_tag": "langgraph",
     "stars": 762,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 12
   },
   {
     "full_name": "vinay-gatech/stocks-insights-ai-agent",
@@ -231,7 +281,9 @@
     "sha": "375efb4041014bd4394354a8a272fdee3a6dcb18",
     "framework_tag": "langgraph",
     "stars": 748,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 65
   },
   {
     "full_name": "braincrew-lab/langgraph-mcp-agents",
@@ -240,7 +292,9 @@
     "sha": "d4694e9db841343a2bd4dd3a30175a02b63d9144",
     "framework_tag": "langgraph",
     "stars": 706,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 16,
+    "py_file_count": 7
   },
   {
     "full_name": "icey1287/SuperMew",
@@ -249,7 +303,9 @@
     "sha": "3b7330f68a448f11e588f902c2991f2906d4479f",
     "framework_tag": "langgraph",
     "stars": 679,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 1,
+    "py_file_count": 45
   },
   {
     "full_name": "langtalks/swe-agent",
@@ -258,7 +314,9 @@
     "sha": "5946af4f57cba03761015837ad5f87ef5c8d99e9",
     "framework_tag": "langgraph",
     "stars": 632,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 16
   },
   {
     "full_name": "nuglifeleoji/Options-Analytics-Agent",
@@ -267,7 +325,9 @@
     "sha": "9de22c3184598440ae2209be87bcd764bd1349af",
     "framework_tag": "langgraph",
     "stars": 628,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 1,
+    "py_file_count": 54
   },
   {
     "full_name": "openai/openai-cs-agents-demo",
@@ -276,16 +336,20 @@
     "sha": "bd7bfca0f5abf50529370814c3e7c88542011925",
     "framework_tag": "openai-agents",
     "stars": 6388,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 8,
+    "py_file_count": 10
   },
   {
     "full_name": "AgentOps-AI/agentops",
     "clone_url": "https://github.com/AgentOps-AI/agentops.git",
     "default_branch": "main",
     "sha": "a855a92dfaa7fd4423f9a68b1ba0295a3a72da80",
-    "framework_tag": "openai-agents",
+    "framework_tag": "langgraph",
     "stars": 5609,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 62,
+    "py_file_count": 501
   },
   {
     "full_name": "qx-labs/agents-deep-research",
@@ -294,34 +358,31 @@
     "sha": "5e7f4b2321b20bf04c72a405688ab9980887c603",
     "framework_tag": "openai-agents",
     "stars": 772,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
-  },
-  {
-    "full_name": "Repello-AI/Agent-Wiz",
-    "clone_url": "https://github.com/Repello-AI/Agent-Wiz.git",
-    "default_branch": "master",
-    "sha": "009989d5a5c86c1cfbe1bc33ac0d0e9274a574ec",
-    "framework_tag": "openai-agents",
-    "stars": 378,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 36
   },
   {
     "full_name": "MLT-OSS/open-assistant-api",
     "clone_url": "https://github.com/MLT-OSS/open-assistant-api.git",
     "default_branch": "main",
     "sha": "bcdfb9bdaf9d755d126d491b82d28e6edf91d929",
-    "framework_tag": "openai-agents",
+    "framework_tag": "unknown",
     "stars": 364,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 150
   },
   {
     "full_name": "chirpz-ai/pandaprobe",
     "clone_url": "https://github.com/chirpz-ai/pandaprobe.git",
     "default_branch": "main",
     "sha": "e67860e2dabcc8d413611a25dfb27c16dc11764f",
-    "framework_tag": "openai-agents",
+    "framework_tag": "unknown",
     "stars": 273,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 172
   },
   {
     "full_name": "agenticsorg/devops",
@@ -330,34 +391,42 @@
     "sha": "a05a6a60316686b788f6a812d4749d5e591c583a",
     "framework_tag": "openai-agents",
     "stars": 214,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 21,
+    "py_file_count": 66
   },
   {
     "full_name": "tensorlakeai/tensorlake-skills",
     "clone_url": "https://github.com/tensorlakeai/tensorlake-skills.git",
     "default_branch": "main",
     "sha": "4be0ef2de75cb3a24828c6d71608a65b9930bbb5",
-    "framework_tag": "openai-agents",
+    "framework_tag": "unknown",
     "stars": 177,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 8
   },
   {
     "full_name": "darinkishore/codex_dspy",
     "clone_url": "https://github.com/darinkishore/codex_dspy.git",
     "default_branch": "main",
     "sha": "cd25f4192026ce71de9de3ca3a91921d3a0e2e37",
-    "framework_tag": "openai-agents",
+    "framework_tag": "unknown",
     "stars": 158,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 25
   },
   {
     "full_name": "sno-ai/llmix",
     "clone_url": "https://github.com/sno-ai/llmix.git",
     "default_branch": "main",
     "sha": "c7694a30bacb35047dc41b5a1766192b19251e7b",
-    "framework_tag": "openai-agents",
+    "framework_tag": "unknown",
     "stars": 129,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 108
   },
   {
     "full_name": "Shaurya-Sethi/circuitron",
@@ -366,7 +435,9 @@
     "sha": "6e2be932deab505464b62e1981eec55c997e8859",
     "framework_tag": "openai-agents",
     "stars": 103,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 12,
+    "py_file_count": 73
   },
   {
     "full_name": "study8677/OpenCMO",
@@ -375,7 +446,9 @@
     "sha": "388cad4c9d48921a8f5066ed06c730459de0d691",
     "framework_tag": "openai-agents",
     "stars": 91,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 26,
+    "py_file_count": 214
   },
   {
     "full_name": "sadiuysal/crawl4ai-mcp-server",
@@ -384,7 +457,9 @@
     "sha": "c3c3b43c2b0c7a9fb5e63f402a25c3a36166f875",
     "framework_tag": "openai-agents",
     "stars": 90,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 1,
+    "py_file_count": 8
   },
   {
     "full_name": "temporal-community/openai-agents-demos",
@@ -393,7 +468,9 @@
     "sha": "ee5f871b48cb26ec28239ef7a4719ab10c4903e8",
     "framework_tag": "openai-agents",
     "stars": 45,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 10,
+    "py_file_count": 27
   },
   {
     "full_name": "hellotinah/financial_agent",
@@ -402,7 +479,9 @@
     "sha": "126c15ceb7644269610edd37d11f66daa5828122",
     "framework_tag": "openai-agents",
     "stars": 36,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 8,
+    "py_file_count": 84
   },
   {
     "full_name": "OctagonAI/octagon-vc-agents",
@@ -411,7 +490,9 @@
     "sha": "8af68fe6ea6f921fa17eb2d2ebb1c63c25d3aee1",
     "framework_tag": "openai-agents",
     "stars": 29,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 12,
+    "py_file_count": 8
   },
   {
     "full_name": "PacktPublishing/Building-Agents-with-OpenAI-Agents-SDK",
@@ -420,7 +501,9 @@
     "sha": "f49a98d003a911201c471970ef896c190344b083",
     "framework_tag": "openai-agents",
     "stars": 25,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 92,
+    "py_file_count": 55
   },
   {
     "full_name": "neo4j-product-examples/graphrag-kyc-agent",
@@ -429,7 +512,9 @@
     "sha": "e39e35be35496fe75c9eff1655bc11f38eee0886",
     "framework_tag": "openai-agents",
     "stars": 25,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 2,
+    "py_file_count": 4
   },
   {
     "full_name": "subhankaladi/OpenAI_Agents_SDK",
@@ -438,16 +523,9 @@
     "sha": "05c887c9567b3eeec165ed85bf45eeff2a7f7e8c",
     "framework_tag": "openai-agents",
     "stars": 24,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
-  },
-  {
-    "full_name": "AsharibAli/agentic-ai-projects",
-    "clone_url": "https://github.com/AsharibAli/agentic-ai-projects.git",
-    "default_branch": "main",
-    "sha": "51005b953b9797516f965bb86fd7abe902b20b9f",
-    "framework_tag": "openai-agents",
-    "stars": 24,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 250,
+    "py_file_count": 185
   },
   {
     "full_name": "serialx/vibecore",
@@ -456,7 +534,9 @@
     "sha": "8de60c7ad8f4533ebff7ae16d9558a8b67a98fa4",
     "framework_tag": "openai-agents",
     "stars": 24,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 7,
+    "py_file_count": 110
   },
   {
     "full_name": "jkmaina/openai-agents-blueprint",
@@ -465,16 +545,20 @@
     "sha": "76cbbcb41a938531a9b85375210ed328d9014606",
     "framework_tag": "openai-agents",
     "stars": 21,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 120,
+    "py_file_count": 95
   },
   {
     "full_name": "aws-samples/sample-logistics-agent-agentcore-runtime",
     "clone_url": "https://github.com/aws-samples/sample-logistics-agent-agentcore-runtime.git",
     "default_branch": "main",
     "sha": "125379f2e5203cad30c8de5f5cf36daf1d90fea7",
-    "framework_tag": "openai-agents",
+    "framework_tag": "unknown",
     "stars": 21,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 6
   },
   {
     "full_name": "khaoss85/AI-Team-Orchestrator",
@@ -483,7 +567,9 @@
     "sha": "cbdd9d9f87da97f8ce07346f5edf1dced55f1232",
     "framework_tag": "openai-agents",
     "stars": 19,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 3,
+    "py_file_count": 580
   },
   {
     "full_name": "temporal-community/openai-agents-sdk-deep-research-demo",
@@ -492,7 +578,9 @@
     "sha": "c0761d82cfff65f972c333418b353215832c2f41",
     "framework_tag": "openai-agents",
     "stars": 18,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 8,
+    "py_file_count": 20
   },
   {
     "full_name": "evalops/agent-harness",
@@ -501,7 +589,9 @@
     "sha": "8f11a6dc33f69f5e7199490d53dcefa318d52d1d",
     "framework_tag": "openai-agents",
     "stars": 18,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 1,
+    "py_file_count": 9
   },
   {
     "full_name": "EdenBD/streamlit-agents-sdk-example",
@@ -510,7 +600,9 @@
     "sha": "030a73406be5f2dca83573eec1b0c4de8cae8c74",
     "framework_tag": "openai-agents",
     "stars": 17,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 6,
+    "py_file_count": 6
   },
   {
     "full_name": "Cognitive-Stack/bull-vision-agent",
@@ -519,16 +611,20 @@
     "sha": "654d62e2f27fdd63a22c03def00a43ceb6c67bee",
     "framework_tag": "openai-agents",
     "stars": 17,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 2,
+    "py_file_count": 25
   },
   {
     "full_name": "wso2-incubator/unitree-go2-realtime-agent",
     "clone_url": "https://github.com/wso2-incubator/unitree-go2-realtime-agent.git",
     "default_branch": "main",
     "sha": "2bcbaed44c5251f36c7528121ce9fe67a6da68ca",
-    "framework_tag": "openai-agents",
+    "framework_tag": "unknown",
     "stars": 17,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 8
   },
   {
     "full_name": "rafaelpierre/openai-agents-redis",
@@ -537,7 +633,9 @@
     "sha": "376603a43c315193bde51d76c877cdd6113650e4",
     "framework_tag": "openai-agents",
     "stars": 16,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 2,
+    "py_file_count": 17
   },
   {
     "full_name": "strnad/CrewAI-Studio",
@@ -546,7 +644,9 @@
     "sha": "c1dbabd482261c90805d4c2f5f6fc5288275c702",
     "framework_tag": "crewai",
     "stars": 1290,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 27
   },
   {
     "full_name": "alexfazio/viral-clips-crew",
@@ -555,7 +655,9 @@
     "sha": "82888d948177216949ab432031f3867b5a19a1c6",
     "framework_tag": "crewai",
     "stars": 757,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 9
   },
   {
     "full_name": "liangdabiao/easy_investment_Agent_crewai",
@@ -564,7 +666,9 @@
     "sha": "ec73a6cb337ff8d6d18040c4893efe16bada5df3",
     "framework_tag": "crewai",
     "stars": 434,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 22
   },
   {
     "full_name": "NanGePlus/CrewAITest",
@@ -573,7 +677,9 @@
     "sha": "17ee7bf1d0799172ae5dffbec34975eb17aed88d",
     "framework_tag": "crewai",
     "stars": 311,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 48
   },
   {
     "full_name": "LangGraph-GUI/CrewAI-GUI-Qt",
@@ -582,7 +688,9 @@
     "sha": "463bb270ffea8d093472acab59910f147638d448",
     "framework_tag": "crewai",
     "stars": 206,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 1,
+    "py_file_count": 18
   },
   {
     "full_name": "AbubakrChan/crewai-UI-business-product-launch",
@@ -591,7 +699,9 @@
     "sha": "52a235f7eb62e001dfcf42d8bcbcf2000c1a7f3c",
     "framework_tag": "crewai",
     "stars": 192,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 1
   },
   {
     "full_name": "tonykipkemboi/crewai-gmail-automation",
@@ -600,7 +710,9 @@
     "sha": "0946e1747effa5930d133a7fb3febdd537f2ad6c",
     "framework_tag": "crewai",
     "stars": 190,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 8
   },
   {
     "full_name": "bhancockio/crewai-updated-tutorial-hierarchical",
@@ -609,7 +721,9 @@
     "sha": "b5f255aa61f17c7f791ab243970c81eb2598c435",
     "framework_tag": "crewai",
     "stars": 179,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 6
   },
   {
     "full_name": "bhancockio/automate-youtube-with-crewai",
@@ -618,7 +732,9 @@
     "sha": "0f46a5c4f0d64b2f4c29f8a12e49f9192eccc8ab",
     "framework_tag": "crewai",
     "stars": 172,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 6
   },
   {
     "full_name": "liangdabiao/crewai_stock_analysis_system",
@@ -627,7 +743,9 @@
     "sha": "aab66c6a5782bb74542bdce6996baba30742e337",
     "framework_tag": "crewai",
     "stars": 165,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 26
   },
   {
     "full_name": "tonykipkemboi/resume-optimization-crew",
@@ -636,7 +754,9 @@
     "sha": "46a5d3283c5e0dd76d02b71d0e6862db4e1404b6",
     "framework_tag": "crewai",
     "stars": 152,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 6
   },
   {
     "full_name": "bhancockio/crewai-rag-deep-dive",
@@ -645,7 +765,9 @@
     "sha": "a17d88e9575d20c76c1cf476925bc06f308cf6b4",
     "framework_tag": "crewai",
     "stars": 151,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 6
   },
   {
     "full_name": "bhancockio/nextjs-crewai-basic-tutorial",
@@ -654,7 +776,9 @@
     "sha": "959e7bc0e1284557972b754a02253d00236eca1b",
     "framework_tag": "crewai",
     "stars": 140,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 10
   },
   {
     "full_name": "NanGePlus/CrewAIFlowsFullStack",
@@ -663,7 +787,9 @@
     "sha": "c29e39092882857bf3ebafdc293c724d42cfad75",
     "framework_tag": "crewai",
     "stars": 124,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 8
   },
   {
     "full_name": "kid0317/crewai_mas_demo",
@@ -672,16 +798,20 @@
     "sha": "d5cfc79d3f61687c777b2e1328d1a265762f72fc",
     "framework_tag": "crewai",
     "stars": 119,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 243
   },
   {
     "full_name": "Grigorij-Dudnik/RoboCrew",
     "clone_url": "https://github.com/Grigorij-Dudnik/RoboCrew.git",
     "default_branch": "master",
     "sha": "40744f9dfd67b9e26efe5b34efe705643f9b2cb5",
-    "framework_tag": "crewai",
+    "framework_tag": "unknown",
     "stars": 108,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 56
   },
   {
     "full_name": "alejandro-ao/crewai-instagram-example",
@@ -690,7 +820,9 @@
     "sha": "c0439becc00396dd2338e6f88505a08934adfad0",
     "framework_tag": "crewai",
     "stars": 101,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 5
   },
   {
     "full_name": "bhancockio/crewai-groq-tutorial",
@@ -699,7 +831,9 @@
     "sha": "d390d8475ae69021aefdd4596462488fcff84cae",
     "framework_tag": "crewai",
     "stars": 93,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 3
   },
   {
     "full_name": "OneDuckyBoy/Awesome-AI-Agents-HUB-for-CrewAI",
@@ -708,16 +842,20 @@
     "sha": "7dde376eb8a92d5c37823a9962a853ebe00248f4",
     "framework_tag": "crewai",
     "stars": 91,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 33
   },
   {
     "full_name": "startino/aitino",
     "clone_url": "https://github.com/startino/aitino.git",
     "default_branch": "alpha",
     "sha": "e12fd3a188975564d17cdd8bc1d91d59bfcae9b8",
-    "framework_tag": "crewai",
+    "framework_tag": "autogen",
     "stars": 90,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 125
   },
   {
     "full_name": "alejandro-ao/crewai-crash-course",
@@ -726,7 +864,9 @@
     "sha": "a11040354e2448f355db8378d56b1e7618f908db",
     "framework_tag": "crewai",
     "stars": 84,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 4
   },
   {
     "full_name": "yuriwa/crewai-sheets-ui",
@@ -735,7 +875,9 @@
     "sha": "46ee39143ff99052c29d1dc9805133c2de81dd25",
     "framework_tag": "crewai",
     "stars": 75,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 26
   },
   {
     "full_name": "tonykipkemboi/crewai-streamlit-demo",
@@ -744,7 +886,9 @@
     "sha": "653549a53d3c085471405c5952d9258045a0f056",
     "framework_tag": "crewai",
     "stars": 73,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 6
   },
   {
     "full_name": "google-gemini/crewai-quickstart",
@@ -753,7 +897,9 @@
     "sha": "5978d64a90e488f252601a6a63aabf67ada6a8a4",
     "framework_tag": "crewai",
     "stars": 70,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 4
   },
   {
     "full_name": "luandev/ComfyUI-CrewAI",
@@ -762,7 +908,9 @@
     "sha": "c19cac0a57e394dfc1ae943ea5e2fc12370d9adb",
     "framework_tag": "crewai",
     "stars": 63,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 12
   },
   {
     "full_name": "microsoft/autogen",
@@ -771,25 +919,31 @@
     "sha": "027ecf0a379bcc1d09956d46d12d44a3ad9cee14",
     "framework_tag": "autogen",
     "stars": 58750,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 546
   },
   {
     "full_name": "microsoft/magentic-ui",
     "clone_url": "https://github.com/microsoft/magentic-ui.git",
     "default_branch": "main",
     "sha": "0e6d4502922d48b367f3b34259c4c7e40cbdc7ec",
-    "framework_tag": "autogen",
+    "framework_tag": "unknown",
     "stars": 9899,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 156
   },
   {
     "full_name": "jgravelle/AutoGroq",
     "clone_url": "https://github.com/jgravelle/AutoGroq.git",
     "default_branch": "main",
     "sha": "ecf1639865edbe8e68e163ac72e779cea833a273",
-    "framework_tag": "autogen",
+    "framework_tag": "unknown",
     "stars": 1501,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 40
   },
   {
     "full_name": "test-zeus-ai/testzeus-hercules",
@@ -798,7 +952,9 @@
     "sha": "59d313af9d26d188fd0513f289f333cbeb2c742d",
     "framework_tag": "autogen",
     "stars": 1038,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 102
   },
   {
     "full_name": "karthikvenkatesan-eaton/Autogen_GraphRAG_Ollama",
@@ -807,16 +963,9 @@
     "sha": "dc31844ac87c313e1c8631e97cc893e4e70ef397",
     "framework_tag": "autogen",
     "stars": 843,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
-  },
-  {
-    "full_name": "victordibia/designing-multiagent-systems",
-    "clone_url": "https://github.com/victordibia/designing-multiagent-systems.git",
-    "default_branch": "main",
-    "sha": "1aebb3111c667238e31fe3c698af2dc49baf4f3f",
-    "framework_tag": "autogen",
-    "stars": 587,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 5
   },
   {
     "full_name": "ag2ai/fastagency",
@@ -825,43 +974,53 @@
     "sha": "f353682dffc61962e6450eb9be3eaf69579d39bd",
     "framework_tag": "autogen",
     "stars": 540,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 271
   },
   {
     "full_name": "TsinghuaC3I/MARTI",
     "clone_url": "https://github.com/TsinghuaC3I/MARTI.git",
     "default_branch": "main",
     "sha": "a2fe2c7b9ec46cf24769c90575c51d847f41d04e",
-    "framework_tag": "autogen",
+    "framework_tag": "unknown",
     "stars": 523,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 168
   },
   {
     "full_name": "Undertone0809/promptulate",
     "clone_url": "https://github.com/Undertone0809/promptulate.git",
     "default_branch": "main",
     "sha": "85fe545598603bb85b3eeeec0e1ee3cfa2f3efe1",
-    "framework_tag": "autogen",
+    "framework_tag": "unknown",
     "stars": 511,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 197
   },
   {
     "full_name": "Upsonic/Tiger",
     "clone_url": "https://github.com/Upsonic/Tiger.git",
     "default_branch": "master",
     "sha": "fc6edfdb8a7cef5d435c4d810c163331988edf54",
-    "framework_tag": "autogen",
+    "framework_tag": "unknown",
     "stars": 471,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 26
   },
   {
     "full_name": "liangdabiao/claude-data-analysis",
     "clone_url": "https://github.com/liangdabiao/claude-data-analysis.git",
     "default_branch": "main",
     "sha": "4aad571f9644b5c91a7159c06054c71430489a6c",
-    "framework_tag": "autogen",
+    "framework_tag": "unknown",
     "stars": 411,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 2
   },
   {
     "full_name": "adamwlarson/ai-book-writer",
@@ -870,25 +1029,20 @@
     "sha": "9066128481b20bfbbcfca82cc791b09fdf18a6a5",
     "framework_tag": "autogen",
     "stars": 387,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 5
   },
   {
     "full_name": "ag2ai/Agents_Failure_Attribution",
     "clone_url": "https://github.com/ag2ai/Agents_Failure_Attribution.git",
     "default_branch": "main",
     "sha": "f4d2b6da464a826580e59b3a0eae15ea2d642d7c",
-    "framework_tag": "autogen",
+    "framework_tag": "unknown",
     "stars": 368,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
-  },
-  {
-    "full_name": "RyjoxTechnologies/Octopoda-OS",
-    "clone_url": "https://github.com/RyjoxTechnologies/Octopoda-OS.git",
-    "default_branch": "main",
-    "sha": "c6f6cf9577cfd79174220d99486769e39ed42b9e",
-    "framework_tag": "autogen",
-    "stars": 341,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 4
   },
   {
     "full_name": "SageMindAI/autogen-agi",
@@ -897,52 +1051,31 @@
     "sha": "ea0dea033ba1a3d5c30bef0e6f0d627ffcee6f21",
     "framework_tag": "autogen",
     "stars": 267,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
-  },
-  {
-    "full_name": "Tswoen/Paper-Agent",
-    "clone_url": "https://github.com/Tswoen/Paper-Agent.git",
-    "default_branch": "main",
-    "sha": "f0b9b27e78f01d3595afa0185d7adab7d13fe348",
-    "framework_tag": "autogen",
-    "stars": 230,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 18
   },
   {
     "full_name": "vortezwohl/Autono",
     "clone_url": "https://github.com/vortezwohl/Autono.git",
     "default_branch": "main",
     "sha": "3b7ebb5dd5cb26606f4e7911644556465572fb91",
-    "framework_tag": "autogen",
+    "framework_tag": "unknown",
     "stars": 211,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
-  },
-  {
-    "full_name": "CronusL-1141/AI-company",
-    "clone_url": "https://github.com/CronusL-1141/AI-company.git",
-    "default_branch": "master",
-    "sha": "e1a9637ef5088dcad05267bcb8302588621dedc5",
-    "framework_tag": "autogen",
-    "stars": 186,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
-  },
-  {
-    "full_name": "velocitybolt/open-extract",
-    "clone_url": "https://github.com/velocitybolt/open-extract.git",
-    "default_branch": "master",
-    "sha": "8203e8eabde2a477810b86045f80e102c3f18f67",
-    "framework_tag": "autogen",
-    "stars": 186,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 52
   },
   {
     "full_name": "HeadyZhang/agent-audit",
     "clone_url": "https://github.com/HeadyZhang/agent-audit.git",
     "default_branch": "master",
     "sha": "27c8416b003117f7acf40fd7925c35862d170ba8",
-    "framework_tag": "autogen",
+    "framework_tag": "crewai",
     "stars": 180,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 299
   },
   {
     "full_name": "liangdabiao/autogen-financial-analysis",
@@ -951,7 +1084,9 @@
     "sha": "c1b9be246a27f57cb0c96feedb9004dfb5646cf1",
     "framework_tag": "autogen",
     "stars": 145,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 61
   },
   {
     "full_name": "Andyinater/AutoGen_EnhancedAgents",
@@ -960,7 +1095,9 @@
     "sha": "d8f13b7bd90cb54cfaecfb473439b786a26f4ebb",
     "framework_tag": "autogen",
     "stars": 117,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 2
   },
   {
     "full_name": "NanGePlus/AutoGenV04Test",
@@ -969,25 +1106,20 @@
     "sha": "4f1dc1368cbd18f0d411b2850df6a9b2a9bfdc7a",
     "framework_tag": "autogen",
     "stars": 114,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
-  },
-  {
-    "full_name": "hidai25/eval-view",
-    "clone_url": "https://github.com/hidai25/eval-view.git",
-    "default_branch": "main",
-    "sha": "47753a89da5ab8dd4412f2177aa89c69fe94d397",
-    "framework_tag": "autogen",
-    "stars": 114,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 16
   },
   {
     "full_name": "microsoft/spec-to-agents",
     "clone_url": "https://github.com/microsoft/spec-to-agents.git",
     "default_branch": "main",
     "sha": "f40268fa5573ce42a6403eb0edb48997eb24532a",
-    "framework_tag": "autogen",
+    "framework_tag": "unknown",
     "stars": 111,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 45
   },
   {
     "full_name": "run-llama/llama_index",
@@ -996,43 +1128,31 @@
     "sha": "9aa5ee5cd2a1ecff6ffa2a8cd6af46b87af674b9",
     "framework_tag": "llama-index",
     "stars": 49975,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
-  },
-  {
-    "full_name": "comet-ml/opik",
-    "clone_url": "https://github.com/comet-ml/opik.git",
-    "default_branch": "main",
-    "sha": "34a43b1fdcf42f6ae2c7d7c139f7ba3f64539f30",
-    "framework_tag": "llama-index",
-    "stars": 19446,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 3836
   },
   {
     "full_name": "szczyglis-dev/py-gpt",
     "clone_url": "https://github.com/szczyglis-dev/py-gpt.git",
     "default_branch": "master",
     "sha": "75bc06e0a0db2d648e8fdf30b05f1ad403c836e1",
-    "framework_tag": "llama-index",
+    "framework_tag": "openai-agents",
     "stars": 1819,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 3,
+    "py_file_count": 1418
   },
   {
     "full_name": "OpenBMB/RepoAgent",
     "clone_url": "https://github.com/OpenBMB/RepoAgent.git",
     "default_branch": "main",
     "sha": "825d988127d7bfd757237d9c4e8678d9104030f0",
-    "framework_tag": "llama-index",
+    "framework_tag": "unknown",
     "stars": 982,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
-  },
-  {
-    "full_name": "alirezadir/Agentic-AI-Systems",
-    "clone_url": "https://github.com/alirezadir/Agentic-AI-Systems.git",
-    "default_branch": "main",
-    "sha": "f8bd4210a7aec5cc65eb1b12367137497cc185b6",
-    "framework_tag": "llama-index",
-    "stars": 349,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 30
   },
   {
     "full_name": "NetEase-Media/grps_trtllm",
@@ -1041,79 +1161,53 @@
     "sha": "972cf6efd42f515f5c6738aa4fd30410da2bd16c",
     "framework_tag": "llama-index",
     "stars": 160,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 49
   },
   {
     "full_name": "LianjiaTech/bella-rag",
     "clone_url": "https://github.com/LianjiaTech/bella-rag.git",
     "default_branch": "main",
     "sha": "e10b86c77bac8ca58acc19f98e3714ba58969a8c",
-    "framework_tag": "llama-index",
+    "framework_tag": "unknown",
     "stars": 57,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
-  },
-  {
-    "full_name": "denniszielke/agentic-playground",
-    "clone_url": "https://github.com/denniszielke/agentic-playground.git",
-    "default_branch": "main",
-    "sha": "a99a84fb94d26bb8f4f6cf29c357a1c3e45d41d2",
-    "framework_tag": "llama-index",
-    "stars": 54,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 258
   },
   {
     "full_name": "blairhudson/fastapi-agents",
     "clone_url": "https://github.com/blairhudson/fastapi-agents.git",
     "default_branch": "main",
     "sha": "2f58a991b81129552e3a2503417d35f244d6c6dc",
-    "framework_tag": "llama-index",
+    "framework_tag": "crewai",
     "stars": 50,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
-  },
-  {
-    "full_name": "Vargha-Kh/Langchain-RAG-DevelopmentKit",
-    "clone_url": "https://github.com/Vargha-Kh/Langchain-RAG-DevelopmentKit.git",
-    "default_branch": "master",
-    "sha": "459fc93a75438997afb8c28692bed08264b700e4",
-    "framework_tag": "llama-index",
-    "stars": 49,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
-  },
-  {
-    "full_name": "MrRezaeiUofT/AMG-RAG",
-    "clone_url": "https://github.com/MrRezaeiUofT/AMG-RAG.git",
-    "default_branch": "main",
-    "sha": "ed71825ce1e952f7b4cadd4f2a8338e6e965737a",
-    "framework_tag": "llama-index",
-    "stars": 31,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 29
   },
   {
     "full_name": "snekkenull/translation-agent-webui",
     "clone_url": "https://github.com/snekkenull/translation-agent-webui.git",
     "default_branch": "main",
     "sha": "a80c139e5bc734c641658b0efb245654495eb9dc",
-    "framework_tag": "llama-index",
+    "framework_tag": "unknown",
     "stars": 30,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
-  },
-  {
-    "full_name": "Agentic-AI-Coach/AgenticAICoach",
-    "clone_url": "https://github.com/Agentic-AI-Coach/AgenticAICoach.git",
-    "default_branch": "master",
-    "sha": "0e9c04cc51caf37ca8ed3fea479ff6f8a31cd353",
-    "framework_tag": "llama-index",
-    "stars": 28,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 3
   },
   {
     "full_name": "sulaiman-shamasna/LlamaIndex-chatbot-with-advanced-search-and-RAG",
     "clone_url": "https://github.com/sulaiman-shamasna/LlamaIndex-chatbot-with-advanced-search-and-RAG.git",
     "default_branch": "main",
     "sha": "4d7e9aa059150272d58757119e50fb88d0ea7ac7",
-    "framework_tag": "llama-index",
+    "framework_tag": "unknown",
     "stars": 21,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 13
   },
   {
     "full_name": "lesteroliver911/llamaindex-agentworkflow-browse-agent",
@@ -1122,16 +1216,20 @@
     "sha": "71bf390641ca16a7c5846d3811ffbbc3812ec161",
     "framework_tag": "llama-index",
     "stars": 16,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 1
   },
   {
     "full_name": "TuanaCelik/llama_index_zoom_assistant",
     "clone_url": "https://github.com/TuanaCelik/llama_index_zoom_assistant.git",
     "default_branch": "main",
     "sha": "e519b266a9683ce083ce72bc4204bf484cdcaba5",
-    "framework_tag": "llama-index",
+    "framework_tag": "unknown",
     "stars": 15,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 2
   },
   {
     "full_name": "AstraBert/llamaindex-docs-agent",
@@ -1140,16 +1238,9 @@
     "sha": "805d4b5dda91193f702156a127559650ae6f2963",
     "framework_tag": "llama-index",
     "stars": 11,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
-  },
-  {
-    "full_name": "henrii1/Full_Agent_build",
-    "clone_url": "https://github.com/henrii1/Full_Agent_build.git",
-    "default_branch": "main",
-    "sha": "d46288e3beac26fa4716405cef6e79f53407fbee",
-    "framework_tag": "llama-index",
-    "stars": 9,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 4
   },
   {
     "full_name": "Andrew-Tsegaye/Advanced-AI-Code-Generation-Agent",
@@ -1158,115 +1249,86 @@
     "sha": "0fb975afba4e2858ad9124cdf0ebe935e64614bd",
     "framework_tag": "llama-index",
     "stars": 9,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 5
   },
   {
     "full_name": "Arjunheregeek/livekit-rag-voice-agent",
     "clone_url": "https://github.com/Arjunheregeek/livekit-rag-voice-agent.git",
     "default_branch": "langchain",
     "sha": "a5bc60ec7584ec5784fcbb7b9aa4014b4582c3be",
-    "framework_tag": "llama-index",
+    "framework_tag": "unknown",
     "stars": 8,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 8
   },
   {
     "full_name": "MahdiAmrollahi/omni-agent",
     "clone_url": "https://github.com/MahdiAmrollahi/omni-agent.git",
     "default_branch": "main",
     "sha": "8b9a561418649e6acb0f2455274c7a262a22bda2",
-    "framework_tag": "langchain-agents",
+    "framework_tag": "unknown",
     "stars": 2,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 11
   },
   {
     "full_name": "nigarishrehmansarmad/Querying-Tabular-Data-using-Agentic-AI",
     "clone_url": "https://github.com/nigarishrehmansarmad/Querying-Tabular-Data-using-Agentic-AI.git",
     "default_branch": "main",
     "sha": "47fcafa4725583b4b345af171bc17dd9e882f9ee",
-    "framework_tag": "langchain-agents",
+    "framework_tag": "unknown",
     "stars": 1,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 1
   },
   {
     "full_name": "hammadyaqoob1985/langchain-course-react-langchain",
     "clone_url": "https://github.com/hammadyaqoob1985/langchain-course-react-langchain.git",
     "default_branch": "main",
     "sha": "6eec29172e4179172f544f46a8191443e0e92966",
-    "framework_tag": "langchain-agents",
+    "framework_tag": "unknown",
     "stars": 0,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
-  },
-  {
-    "full_name": "Saahil23579/langChain-s_agentExecutor",
-    "clone_url": "https://github.com/Saahil23579/langChain-s_agentExecutor.git",
-    "default_branch": "main",
-    "sha": "fda4490d6a2761b6cd401e67437a3f909558e94c",
-    "framework_tag": "langchain-agents",
-    "stars": 0,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 2
   },
   {
     "full_name": "hammadyaqoob1985/langchain-course-react-langchain-with-tool-calling",
     "clone_url": "https://github.com/hammadyaqoob1985/langchain-course-react-langchain-with-tool-calling.git",
     "default_branch": "main",
     "sha": "95da7907a2a5aa7fa8974d6502b3e1a3591d9878",
-    "framework_tag": "langchain-agents",
+    "framework_tag": "unknown",
     "stars": 0,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
-  },
-  {
-    "full_name": "phooning/agents",
-    "clone_url": "https://github.com/phooning/agents.git",
-    "default_branch": "main",
-    "sha": "375698065a503d2bd6e9067e1e233d522e116f36",
-    "framework_tag": "langchain-agents",
-    "stars": 0,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 2
   },
   {
     "full_name": "ponagan/AI---work-flow-agent",
     "clone_url": "https://github.com/ponagan/AI---work-flow-agent.git",
     "default_branch": "main",
     "sha": "b292537d1002031f387627dfe21a7a08d6cccbea",
-    "framework_tag": "langchain-agents",
+    "framework_tag": "unknown",
     "stars": 0,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
-  },
-  {
-    "full_name": "mazentarrek/LangGraph-ReAct-AgentExecutor",
-    "clone_url": "https://github.com/mazentarrek/LangGraph-ReAct-AgentExecutor.git",
-    "default_branch": "main",
-    "sha": "4e6cc8444b38a7f812380f87055fc22d36f2d01f",
-    "framework_tag": "langchain-agents",
-    "stars": 0,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
-  },
-  {
-    "full_name": "deep10dd/multi-step-agent",
-    "clone_url": "https://github.com/deep10dd/multi-step-agent.git",
-    "default_branch": "main",
-    "sha": "e5e8e59ab0b41e3e75d43869ede18e41d93bedf4",
-    "framework_tag": "langchain-agents",
-    "stars": 0,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 11
   },
   {
     "full_name": "vaishnavi33/agentic-fraud-detection-mcp",
     "clone_url": "https://github.com/vaishnavi33/agentic-fraud-detection-mcp.git",
     "default_branch": "main",
     "sha": "a897a9fdd26c42950fc117da3c1edda61e90c143",
-    "framework_tag": "langchain-agents",
+    "framework_tag": "unknown",
     "stars": 0,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
-  },
-  {
-    "full_name": "plasmacat420/langgraph-multi-agent",
-    "clone_url": "https://github.com/plasmacat420/langgraph-multi-agent.git",
-    "default_branch": "main",
-    "sha": "bf95bccac68d998bf1983e8d7834e5d257b38ba3",
-    "framework_tag": "langchain-agents",
-    "stars": 0,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 1989
   },
   {
     "full_name": "Nishmithasshett/LLM-Agent",
@@ -1275,78 +1337,63 @@
     "sha": "aed7cb7b01f6309702a8f423c130d4b35ebe8d3e",
     "framework_tag": "langchain-agents",
     "stars": 0,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 1,
+    "py_file_count": 9
   },
   {
     "full_name": "Manasavijr/llm-agentic-research",
     "clone_url": "https://github.com/Manasavijr/llm-agentic-research.git",
     "default_branch": "main",
     "sha": "91e66a8afe00fe715140de6f3636951d4bcb5875",
-    "framework_tag": "langchain-agents",
+    "framework_tag": "unknown",
     "stars": 0,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
-  },
-  {
-    "full_name": "baltagiyc/ai-agents-code-interpreter",
-    "clone_url": "https://github.com/baltagiyc/ai-agents-code-interpreter.git",
-    "default_branch": "main",
-    "sha": "1e7960514863c182d225fa9f6e1080baeb9ed48f",
-    "framework_tag": "langchain-agents",
-    "stars": 1,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 22
   },
   {
     "full_name": "ndkhoa211/ReAct-agent-from-scratch",
     "clone_url": "https://github.com/ndkhoa211/ReAct-agent-from-scratch.git",
     "default_branch": "main",
     "sha": "789dbe521ec67bd6abb072258773cda1649a85c9",
-    "framework_tag": "langchain-agents",
+    "framework_tag": "unknown",
     "stars": 0,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
-  },
-  {
-    "full_name": "Jose-henry/AI-Agent-judge",
-    "clone_url": "https://github.com/Jose-henry/AI-Agent-judge.git",
-    "default_branch": "main",
-    "sha": "baf97af6df5e036dc43ed375e2a281eec87b942b",
-    "framework_tag": "langchain-agents",
-    "stars": 0,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 2
   },
   {
     "full_name": "Decade-qiu/CookHero",
     "clone_url": "https://github.com/Decade-qiu/CookHero.git",
     "default_branch": "main",
     "sha": "b8d4c5bad62ff710f468403630defc788e59a5fb",
-    "framework_tag": "langchain-agents",
+    "framework_tag": "unknown",
     "stars": 550,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
-  },
-  {
-    "full_name": "lhh737/LangChain-ReAct-Agent",
-    "clone_url": "https://github.com/lhh737/LangChain-ReAct-Agent.git",
-    "default_branch": "main",
-    "sha": "5923949e7647a31899e67c48cc34ce261633c2ee",
-    "framework_tag": "langchain-agents",
-    "stars": 225,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 139
   },
   {
     "full_name": "OpenDemon/Pilipili-AutoVideo",
     "clone_url": "https://github.com/OpenDemon/Pilipili-AutoVideo.git",
     "default_branch": "main",
     "sha": "95b93df5af30d93f30aa29100270aa24b5563f5b",
-    "framework_tag": "langchain-agents",
+    "framework_tag": "unknown",
     "stars": 177,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "collected_at": "2026-06-07T17:35:22.836830+00:00",
+    "agent_count": 0,
+    "py_file_count": 17
   },
   {
-    "full_name": "Citrus-bit/Anaxa",
-    "clone_url": "https://github.com/Citrus-bit/Anaxa.git",
+    "full_name": "chopratejas/headroom",
+    "clone_url": "https://github.com/chopratejas/headroom.git",
     "default_branch": "main",
-    "sha": "3ed8e031e21e98243f65ccc6b6ef5e54e4f9968b",
+    "sha": "cbba0353860248fdcbcfc841481984989f7909e8",
     "framework_tag": "langchain-agents",
-    "stars": 128,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00"
+    "stars": 16890,
+    "collected_at": "2026-06-07T23:55:53.708693+00:00",
+    "agent_count": -1,
+    "py_file_count": 0
   }
 ]

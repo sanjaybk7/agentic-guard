@@ -1,0 +1,430 @@
+{
+  "total": 127,
+  "framework_distribution": {
+    "langgraph": 30,
+    "unknown": 34,
+    "openai-agents": 21,
+    "crewai": 25,
+    "autogen": 10,
+    "llama-index": 5,
+    "langchain-agents": 2
+  },
+  "retagged": [
+    {
+      "full_name": "JudgmentLabs/judgeval",
+      "old_tag": "langgraph",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "AgentOps-AI/agentops",
+      "old_tag": "openai-agents",
+      "new_tag": "langgraph"
+    },
+    {
+      "full_name": "Repello-AI/Agent-Wiz",
+      "old_tag": "openai-agents",
+      "new_tag": "langgraph"
+    },
+    {
+      "full_name": "MLT-OSS/open-assistant-api",
+      "old_tag": "openai-agents",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "chirpz-ai/pandaprobe",
+      "old_tag": "openai-agents",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "tensorlakeai/tensorlake-skills",
+      "old_tag": "openai-agents",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "darinkishore/codex_dspy",
+      "old_tag": "openai-agents",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "sno-ai/llmix",
+      "old_tag": "openai-agents",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "AsharibAli/agentic-ai-projects",
+      "old_tag": "openai-agents",
+      "new_tag": "langgraph"
+    },
+    {
+      "full_name": "aws-samples/sample-logistics-agent-agentcore-runtime",
+      "old_tag": "openai-agents",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "wso2-incubator/unitree-go2-realtime-agent",
+      "old_tag": "openai-agents",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "Grigorij-Dudnik/RoboCrew",
+      "old_tag": "crewai",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "startino/aitino",
+      "old_tag": "crewai",
+      "new_tag": "autogen"
+    },
+    {
+      "full_name": "microsoft/magentic-ui",
+      "old_tag": "autogen",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "jgravelle/AutoGroq",
+      "old_tag": "autogen",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "victordibia/designing-multiagent-systems",
+      "old_tag": "autogen",
+      "new_tag": "langgraph"
+    },
+    {
+      "full_name": "TsinghuaC3I/MARTI",
+      "old_tag": "autogen",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "Undertone0809/promptulate",
+      "old_tag": "autogen",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "Upsonic/Tiger",
+      "old_tag": "autogen",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "liangdabiao/claude-data-analysis",
+      "old_tag": "autogen",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "ag2ai/Agents_Failure_Attribution",
+      "old_tag": "autogen",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "RyjoxTechnologies/Octopoda-OS",
+      "old_tag": "autogen",
+      "new_tag": "langgraph"
+    },
+    {
+      "full_name": "Tswoen/Paper-Agent",
+      "old_tag": "autogen",
+      "new_tag": "langgraph"
+    },
+    {
+      "full_name": "vortezwohl/Autono",
+      "old_tag": "autogen",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "CronusL-1141/AI-company",
+      "old_tag": "autogen",
+      "new_tag": "langgraph"
+    },
+    {
+      "full_name": "velocitybolt/open-extract",
+      "old_tag": "autogen",
+      "new_tag": "langgraph"
+    },
+    {
+      "full_name": "HeadyZhang/agent-audit",
+      "old_tag": "autogen",
+      "new_tag": "crewai"
+    },
+    {
+      "full_name": "hidai25/eval-view",
+      "old_tag": "autogen",
+      "new_tag": "langgraph"
+    },
+    {
+      "full_name": "microsoft/spec-to-agents",
+      "old_tag": "autogen",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "comet-ml/opik",
+      "old_tag": "llama-index",
+      "new_tag": "langgraph"
+    },
+    {
+      "full_name": "szczyglis-dev/py-gpt",
+      "old_tag": "llama-index",
+      "new_tag": "openai-agents"
+    },
+    {
+      "full_name": "OpenBMB/RepoAgent",
+      "old_tag": "llama-index",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "alirezadir/Agentic-AI-Systems",
+      "old_tag": "llama-index",
+      "new_tag": "langgraph"
+    },
+    {
+      "full_name": "LianjiaTech/bella-rag",
+      "old_tag": "llama-index",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "denniszielke/agentic-playground",
+      "old_tag": "llama-index",
+      "new_tag": "langgraph"
+    },
+    {
+      "full_name": "blairhudson/fastapi-agents",
+      "old_tag": "llama-index",
+      "new_tag": "crewai"
+    },
+    {
+      "full_name": "Vargha-Kh/Langchain-RAG-DevelopmentKit",
+      "old_tag": "llama-index",
+      "new_tag": "langgraph"
+    },
+    {
+      "full_name": "MrRezaeiUofT/AMG-RAG",
+      "old_tag": "llama-index",
+      "new_tag": "langgraph"
+    },
+    {
+      "full_name": "snekkenull/translation-agent-webui",
+      "old_tag": "llama-index",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "Agentic-AI-Coach/AgenticAICoach",
+      "old_tag": "llama-index",
+      "new_tag": "crewai"
+    },
+    {
+      "full_name": "sulaiman-shamasna/LlamaIndex-chatbot-with-advanced-search-and-RAG",
+      "old_tag": "llama-index",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "TuanaCelik/llama_index_zoom_assistant",
+      "old_tag": "llama-index",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "henrii1/Full_Agent_build",
+      "old_tag": "llama-index",
+      "new_tag": "crewai"
+    },
+    {
+      "full_name": "Arjunheregeek/livekit-rag-voice-agent",
+      "old_tag": "llama-index",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "MahdiAmrollahi/omni-agent",
+      "old_tag": "langchain-agents",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "nigarishrehmansarmad/Querying-Tabular-Data-using-Agentic-AI",
+      "old_tag": "langchain-agents",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "hammadyaqoob1985/langchain-course-react-langchain",
+      "old_tag": "langchain-agents",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "hammadyaqoob1985/langchain-course-react-langchain-with-tool-calling",
+      "old_tag": "langchain-agents",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "phooning/agents",
+      "old_tag": "langchain-agents",
+      "new_tag": "crewai"
+    },
+    {
+      "full_name": "ponagan/AI---work-flow-agent",
+      "old_tag": "langchain-agents",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "mazentarrek/LangGraph-ReAct-AgentExecutor",
+      "old_tag": "langchain-agents",
+      "new_tag": "langgraph"
+    },
+    {
+      "full_name": "deep10dd/multi-step-agent",
+      "old_tag": "langchain-agents",
+      "new_tag": "langgraph"
+    },
+    {
+      "full_name": "vaishnavi33/agentic-fraud-detection-mcp",
+      "old_tag": "langchain-agents",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "plasmacat420/langgraph-multi-agent",
+      "old_tag": "langchain-agents",
+      "new_tag": "langgraph"
+    },
+    {
+      "full_name": "Manasavijr/llm-agentic-research",
+      "old_tag": "langchain-agents",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "baltagiyc/ai-agents-code-interpreter",
+      "old_tag": "langchain-agents",
+      "new_tag": "langgraph"
+    },
+    {
+      "full_name": "ndkhoa211/ReAct-agent-from-scratch",
+      "old_tag": "langchain-agents",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "Jose-henry/AI-Agent-judge",
+      "old_tag": "langchain-agents",
+      "new_tag": "langgraph"
+    },
+    {
+      "full_name": "Decade-qiu/CookHero",
+      "old_tag": "langchain-agents",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "lhh737/LangChain-ReAct-Agent",
+      "old_tag": "langchain-agents",
+      "new_tag": "langgraph"
+    },
+    {
+      "full_name": "OpenDemon/Pilipili-AutoVideo",
+      "old_tag": "langchain-agents",
+      "new_tag": "unknown"
+    },
+    {
+      "full_name": "Citrus-bit/Anaxa",
+      "old_tag": "langchain-agents",
+      "new_tag": "langgraph"
+    }
+  ],
+  "removed": [
+    {
+      "full_name": "Saahil23579/langChain-s_agentExecutor",
+      "stars": 0,
+      "py_files": 2,
+      "reason": "0-2 stars and <5 Python files"
+    }
+  ],
+  "added_replacements": [
+    {
+      "full_name": "chopratejas/headroom",
+      "stars": 16890,
+      "framework_tag": "langchain-agents"
+    }
+  ],
+  "zero_agent_repos": [
+    "minitap-ai/mobile-use",
+    "wassim249/fastapi-langgraph-agent-production-ready-template",
+    "guy-hartstein/company-research-agent",
+    "neural-maze/philoagents-course",
+    "vstorm-co/full-stack-ai-agent-template",
+    "JudgmentLabs/judgeval",
+    "aegra/aegra",
+    "souvikmajumder26/Multi-Agent-Medical-Assistant",
+    "zamalali/DeepGit",
+    "FunnyWolf/agentic-soc-platform",
+    "Haohao-end/openagent",
+    "FareedKhan-dev/production-grade-agentic-system",
+    "langchain-ai/react-agent",
+    "vinay-gatech/stocks-insights-ai-agent",
+    "langtalks/swe-agent",
+    "qx-labs/agents-deep-research",
+    "MLT-OSS/open-assistant-api",
+    "chirpz-ai/pandaprobe",
+    "tensorlakeai/tensorlake-skills",
+    "darinkishore/codex_dspy",
+    "sno-ai/llmix",
+    "aws-samples/sample-logistics-agent-agentcore-runtime",
+    "wso2-incubator/unitree-go2-realtime-agent",
+    "strnad/CrewAI-Studio",
+    "alexfazio/viral-clips-crew",
+    "liangdabiao/easy_investment_Agent_crewai",
+    "NanGePlus/CrewAITest",
+    "AbubakrChan/crewai-UI-business-product-launch",
+    "tonykipkemboi/crewai-gmail-automation",
+    "bhancockio/crewai-updated-tutorial-hierarchical",
+    "bhancockio/automate-youtube-with-crewai",
+    "liangdabiao/crewai_stock_analysis_system",
+    "tonykipkemboi/resume-optimization-crew",
+    "bhancockio/crewai-rag-deep-dive",
+    "bhancockio/nextjs-crewai-basic-tutorial",
+    "NanGePlus/CrewAIFlowsFullStack",
+    "kid0317/crewai_mas_demo",
+    "Grigorij-Dudnik/RoboCrew",
+    "alejandro-ao/crewai-instagram-example",
+    "bhancockio/crewai-groq-tutorial",
+    "OneDuckyBoy/Awesome-AI-Agents-HUB-for-CrewAI",
+    "startino/aitino",
+    "alejandro-ao/crewai-crash-course",
+    "yuriwa/crewai-sheets-ui",
+    "tonykipkemboi/crewai-streamlit-demo",
+    "google-gemini/crewai-quickstart",
+    "luandev/ComfyUI-CrewAI",
+    "microsoft/autogen",
+    "microsoft/magentic-ui",
+    "jgravelle/AutoGroq",
+    "test-zeus-ai/testzeus-hercules",
+    "karthikvenkatesan-eaton/Autogen_GraphRAG_Ollama",
+    "ag2ai/fastagency",
+    "TsinghuaC3I/MARTI",
+    "Undertone0809/promptulate",
+    "Upsonic/Tiger",
+    "liangdabiao/claude-data-analysis",
+    "adamwlarson/ai-book-writer",
+    "ag2ai/Agents_Failure_Attribution",
+    "SageMindAI/autogen-agi",
+    "vortezwohl/Autono",
+    "HeadyZhang/agent-audit",
+    "liangdabiao/autogen-financial-analysis",
+    "Andyinater/AutoGen_EnhancedAgents",
+    "NanGePlus/AutoGenV04Test",
+    "microsoft/spec-to-agents",
+    "run-llama/llama_index",
+    "OpenBMB/RepoAgent",
+    "NetEase-Media/grps_trtllm",
+    "LianjiaTech/bella-rag",
+    "blairhudson/fastapi-agents",
+    "snekkenull/translation-agent-webui",
+    "sulaiman-shamasna/LlamaIndex-chatbot-with-advanced-search-and-RAG",
+    "lesteroliver911/llamaindex-agentworkflow-browse-agent",
+    "TuanaCelik/llama_index_zoom_assistant",
+    "AstraBert/llamaindex-docs-agent",
+    "Andrew-Tsegaye/Advanced-AI-Code-Generation-Agent",
+    "Arjunheregeek/livekit-rag-voice-agent",
+    "MahdiAmrollahi/omni-agent",
+    "nigarishrehmansarmad/Querying-Tabular-Data-using-Agentic-AI",
+    "hammadyaqoob1985/langchain-course-react-langchain",
+    "hammadyaqoob1985/langchain-course-react-langchain-with-tool-calling",
+    "ponagan/AI---work-flow-agent",
+    "vaishnavi33/agentic-fraud-detection-mcp",
+    "Manasavijr/llm-agentic-research",
+    "ndkhoa211/ReAct-agent-from-scratch",
+    "Decade-qiu/CookHero",
+    "OpenDemon/Pilipili-AutoVideo"
+  ],
+  "zero_agent_count": 88
+}

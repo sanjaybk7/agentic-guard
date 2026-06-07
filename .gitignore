@@ -24,3 +24,6 @@ out/
 .claude/
 .idea/
 .vscode/
+
+# Eval corpus clones — large, reproducible via clone_corpus.py
+eval/repos/
