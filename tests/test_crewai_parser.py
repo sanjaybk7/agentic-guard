@@ -234,7 +234,7 @@ def test_sources_only_crewai_no_ig001() -> None:
     )
     tool_names = {t.name for t in agents[0].tools}
     assert tool_names, (
-        f"§7 expected non-empty source tool list, got empty — "
+        "§7 expected non-empty source tool list, got empty — "
         "tool extraction must work before rule behavior can be verified"
     )
     assert "search_web" in tool_names or "read_email" in tool_names, (
@@ -266,7 +266,7 @@ def test_sinks_only_crewai_no_ig001() -> None:
     )
     tool_names = {t.name for t in agents[0].tools}
     assert tool_names, (
-        f"§7 expected non-empty sink tool list, got empty — "
+        "§7 expected non-empty sink tool list, got empty — "
         "tool extraction must work before rule behavior can be verified"
     )
     assert "send_email" in tool_names or "write_file" in tool_names, (

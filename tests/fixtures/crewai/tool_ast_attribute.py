@@ -7,7 +7,7 @@ no substring match — so this resolves NEUTRAL (tests name extraction, not clas
 """
 
 from crewai import Agent
-from my_tools import SearchTools  # noqa: F401 — import present for parser context
+from my_tools import SearchTools
 
 agent = Agent(
     role="Researcher",

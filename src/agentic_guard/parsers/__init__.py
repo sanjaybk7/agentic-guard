@@ -5,4 +5,4 @@ from agentic_guard.parsers.crewai import CrewAIParser
 from agentic_guard.parsers.langgraph import LangGraphParser
 from agentic_guard.parsers.openai_agents import OpenAIAgentsParser
 
-__all__ = ["FrameworkParser", "CrewAIParser", "LangGraphParser", "OpenAIAgentsParser"]
+__all__ = ["CrewAIParser", "FrameworkParser", "LangGraphParser", "OpenAIAgentsParser"]

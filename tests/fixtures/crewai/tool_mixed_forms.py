@@ -7,7 +7,7 @@ unpacks) are skipped without error.
 
 from crewai import Agent
 from crewai_tools import SerperDevTool
-from my_tools import SearchTools  # noqa: F401
+from my_tools import SearchTools
 
 lookup_tool = None  # ast.Name
 

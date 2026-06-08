@@ -10,8 +10,8 @@ The engine's _dedup_agents_by_location must collapse this to exactly 1 agent
 and record 1 collision in result.agent_location_collisions.
 """
 
-from crewai import Agent
 from agents import SomeLocalHelper  # noqa: F401 — local agents.py, not OpenAI SDK
+from crewai import Agent
 
 agent = Agent(
     role="Researcher",
