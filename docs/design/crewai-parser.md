@@ -152,15 +152,20 @@ Agent(role="Researcher", goal="Find market data", backstory="You are...")
 
 **Result: `system_prompt_is_dynamic = False`.**
 
-### Hypothetical dynamic case
+### Dynamic case (evidenced in corpus)
 
-If a repo were to pass an f-string or concatenated string:
+`liangdabiao/crewai_stock_analysis_system/src/crews/data_collection_crew.py` passes
+f-strings for `goal` and `backstory`:
 
 ```python
-Agent(role=f"Analyst for {company}", goal=..., backstory=...)
+Agent(
+    role="市场研究员",
+    goal=f"收集{company}的市场趋势、行业动态和相关新闻",
+    ...
+)
 ```
 
-`classify_prompt_expr` applied to the `role`, `goal`, or `backstory` keyword arguments would return `True`. Set `system_prompt_is_dynamic = True` and populate `system_prompt_taint_sources` accordingly.
+`classify_prompt_expr` applied to the `role`, `goal`, or `backstory` keyword arguments returns `True` for any `JoinedStr` node. Set `system_prompt_is_dynamic = True` and populate `system_prompt_taint_sources` with the interpolated variable names.
 
 ### Implementation
 
