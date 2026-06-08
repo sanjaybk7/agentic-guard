@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import logging
 from collections.abc import Iterable
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -14,6 +15,8 @@ from agentic_guard.parsers.base import FrameworkParser, ScanContext
 from agentic_guard.rules import all_rules
 from agentic_guard.rules.base import Rule, RuleContext
 from agentic_guard.taxonomy import Taxonomy
+
+_log = logging.getLogger(__name__)
 
 _PYTHON_EXTENSIONS = {".py"}
 _NOTEBOOK_EXTENSIONS = {".ipynb"}
@@ -64,6 +67,7 @@ class ScanResult:
     files_scanned: int = 0
     tools_seen: int = 0
     agents_seen: int = 0
+    agent_location_collisions: int = 0
 
     @property
     def has_blocking(self) -> bool:
@@ -124,8 +128,10 @@ class Scanner:
                     all_tools.extend(tools)
                     all_agents.extend(agents)
 
+        all_agents, collisions = _dedup_agents_by_location(all_agents)
         result.tools_seen = len(all_tools)
         result.agents_seen = len(all_agents)
+        result.agent_location_collisions = collisions
 
         ctx = RuleContext(tools=all_tools, agents=all_agents, taxonomy=self.taxonomy)
         for rule in self.rules:
@@ -175,6 +181,42 @@ class Scanner:
                 if not self.include_tests and _is_test_path(path):
                     continue
                 yield path
+
+
+def _dedup_agents_by_location(
+    agents: list[Agent],
+) -> tuple[list[Agent], int]:
+    """Dedup agents that share a source location across parsers.
+
+    When two parsers both emit an Agent at the same (file, line, col) — e.g.
+    OpenAIAgentsParser and CrewAIParser both firing on a file that imports both
+    ``agents`` and ``crewai`` — keep the first (by parser order) and drop the
+    rest. Each dropped agent emits a structured log warning so collisions are
+    visible rather than silently hidden.
+
+    Returns (deduped_agents, collision_count).
+    """
+    seen: dict[tuple[Path, int, int], Agent] = {}
+    collisions = 0
+    result: list[Agent] = []
+    for agent in agents:
+        loc = agent.location
+        key = (loc.file, loc.line, loc.column)
+        if key in seen:
+            collisions += 1
+            kept = seen[key]
+            _log.warning(
+                "agent-location-collision file=%s line=%d col=%d kept=%s dropped=%s",
+                loc.file,
+                loc.line,
+                loc.column,
+                kept.framework,
+                agent.framework,
+            )
+        else:
+            seen[key] = agent
+            result.append(agent)
+    return result, collisions
 
 
 def _remap_notebook_lines(

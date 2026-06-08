@@ -1,4 +1,4 @@
-"""Tests for the CrewAI parser — fixture matrix for docs/design/crewai-parser.md.
+"""Tests for the CrewAI parser and cross-parser dedup — fixture matrix for docs/design/crewai-parser.md.
 
 Red half of TDD: CrewAIParser exists as a non-functional stub. Every test that
 expects agents or tool extraction will fail at the assertion level (stub returns
@@ -277,4 +277,33 @@ def test_sinks_only_crewai_no_ig001() -> None:
     ig001 = [f for f in result.findings if f.rule_id == "IG001"]
     assert not ig001, (
         f"§7 IG001 fired on a sinks-only agent — no source tool means no confused-deputy risk: {ig001}"
+    )
+
+
+# ---------------------------------------------------------------------------
+# Cross-parser dedup — location collision regression
+# ---------------------------------------------------------------------------
+
+
+def test_no_double_emission_on_both_import() -> None:
+    """Regression: Agent(...) in a file importing both crewai and a local agents module.
+
+    OpenAIAgentsParser.matches_file fires on any 'from agents import ...' including
+    local modules named agents.py. Without location-dedup, a single Agent(...) call
+    would be emitted twice (framework=openai-agents AND framework=crewai).
+
+    The engine's _dedup_agents_by_location must:
+    (a) collapse both emissions to exactly 1 agent (agents_seen == 1)
+    (b) record the collision (agent_location_collisions == 1)
+
+    Uses the full default Scanner (all parsers) so both parsers actually run.
+    """
+    result = Scanner().scan(FIXTURES / "both_import_collision.py")
+    assert result.agents_seen == 1, (
+        f"Double-emission: expected 1 agent after location-dedup, got {result.agents_seen}. "
+        "Engine must dedup agents sharing the same (file, line, col) across parsers."
+    )
+    assert result.agent_location_collisions == 1, (
+        f"Expected 1 collision recorded, got {result.agent_location_collisions}. "
+        "Dedup must increment agent_location_collisions for each dropped agent."
     )
