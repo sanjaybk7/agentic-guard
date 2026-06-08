@@ -130,12 +130,21 @@ def test_toolless_agent_emitted() -> None:
 
 
 def test_runtime_indirect_tools_no_hallucination() -> None:
-    """§3/§5 — Agent(config=runtime_dict) no tools= → emitted with tools=[], no hallucinated tools."""
+    """§3/§5 — Agent(config=runtime_dict) no tools= → (a) emitted, (b) tools=[].
+
+    Two-part check so the test cannot pass vacuously:
+    (a) agent must be detected — the Agent(...) call is statically visible.
+    (b) tool list must be empty — parser must not hallucinate names from the
+        runtime config value.
+    Both parts must hold; failing either is a bug.
+    """
     _, agents = _parser().parse_file(FIXTURES / "runtime_indirect_tools.py")
+    # (a) detection
     assert len(agents) == 1, (
         "§5 runtime-indirect agent not emitted — Agent(...) call is statically "
         "visible so parser must still emit it"
     )
+    # (b) no hallucination
     assert agents[0].tools == [], (
         f"§3 parser hallucinated tool names from runtime config: {agents[0].tools}"
     )
@@ -208,12 +217,30 @@ def test_name_from_method_fallback() -> None:
 
 
 def test_sources_only_crewai_no_ig001() -> None:
-    """§7 IG001 precision — agent with only source tools → IG001 must NOT fire.
+    """§7 IG001 precision — agent with only source tools → (a) detected, (b) IG001 NOT fire.
 
-    On the red half this passes vacuously (no agents detected → no findings).
-    On the green half it verifies the source+sink-pair requirement holds for
-    crewai-emitted agents, preventing the DeepGit-class false positive.
+    Two-part check so the test cannot pass vacuously on the red half:
+    (a) parser must detect the agent and extract its source tools — if this fails,
+        the "IG001 silent" assertion proves nothing.
+    (b) IG001 must not fire — no sink means no confused-deputy risk.
+    Tool names (search_web, read_email) are existing taxonomy SOURCE patterns so
+    the rule engine can evaluate them without the CrewAI taxonomy PR.
     """
+    _, agents = _parser().parse_file(FIXTURES / "sources_only_crewai.py")
+    # (a) detection with non-empty tool list
+    assert len(agents) >= 1, (
+        "§7 agent not detected in sources_only_crewai fixture — "
+        "IG001 silence is meaningless without a detected agent"
+    )
+    tool_names = {t.name for t in agents[0].tools}
+    assert tool_names, (
+        f"§7 expected non-empty source tool list, got empty — "
+        "tool extraction must work before rule behavior can be verified"
+    )
+    assert "search_web" in tool_names or "read_email" in tool_names, (
+        f"§7 expected taxonomy-recognized SOURCE tool in list, got {tool_names}"
+    )
+    # (b) IG001 must not fire
     result = _scanner().scan(FIXTURES / "sources_only_crewai.py")
     ig001 = [f for f in result.findings if f.rule_id == "IG001"]
     assert not ig001, (
@@ -222,11 +249,30 @@ def test_sources_only_crewai_no_ig001() -> None:
 
 
 def test_sinks_only_crewai_no_ig001() -> None:
-    """§7 IG001 precision — agent with only sink tools → IG001 must NOT fire.
+    """§7 IG001 precision — agent with only sink tools → (a) detected, (b) IG001 NOT fire.
 
-    On the red half this passes vacuously (no agents detected → no findings).
-    On the green half it verifies no source → no confused-deputy risk.
+    Two-part check so the test cannot pass vacuously on the red half:
+    (a) parser must detect the agent and extract its sink tools — if this fails,
+        the "IG001 silent" assertion proves nothing.
+    (b) IG001 must not fire — no source means no attacker-controlled input.
+    Tool names (send_email, write_file) are existing taxonomy SINK patterns so
+    the rule engine can evaluate them without the CrewAI taxonomy PR.
     """
+    _, agents = _parser().parse_file(FIXTURES / "sinks_only_crewai.py")
+    # (a) detection with non-empty tool list
+    assert len(agents) >= 1, (
+        "§7 agent not detected in sinks_only_crewai fixture — "
+        "IG001 silence is meaningless without a detected agent"
+    )
+    tool_names = {t.name for t in agents[0].tools}
+    assert tool_names, (
+        f"§7 expected non-empty sink tool list, got empty — "
+        "tool extraction must work before rule behavior can be verified"
+    )
+    assert "send_email" in tool_names or "write_file" in tool_names, (
+        f"§7 expected taxonomy-recognized SINK tool in list, got {tool_names}"
+    )
+    # (b) IG001 must not fire
     result = _scanner().scan(FIXTURES / "sinks_only_crewai.py")
     ig001 = [f for f in result.findings if f.rule_id == "IG001"]
     assert not ig001, (
