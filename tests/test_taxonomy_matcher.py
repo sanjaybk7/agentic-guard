@@ -194,18 +194,20 @@ def test_search_web_snake_case_unchanged(taxonomy: Taxonomy) -> None:
 # ---------------------------------------------------------------------------
 
 
-def test_serper_dev_tool_stays_neutral(taxonomy: Taxonomy) -> None:
-    """SerperDevTool has no existing pattern match — stays NEUTRAL in Phase 1.
-    Phase 3 will add the serperdev pattern explicitly.
-    """
-    assert taxonomy.classify("SerperDevTool") is None
+def test_serper_dev_tool_classifies_source(taxonomy: Taxonomy) -> None:
+    """Phase 3 added 'serper' pattern — SerperDevTool now classifies SOURCE."""
+    entry = taxonomy.classify("SerperDevTool")
+    assert entry is not None, "SerperDevTool must classify after Phase 3 taxonomy addition"
+    assert entry.classification == ToolClassification.SOURCE
+    assert entry.pattern == "serper"
 
 
-def test_gmail_delete_tool_stays_neutral(taxonomy: Taxonomy) -> None:
-    """GmailDeleteTool: delete_file requires the 'file' token, absent here.
-    The tool deletes emails, not files — delete_file should NOT match it.
-    """
-    assert taxonomy.classify("GmailDeleteTool") is None
+def test_gmail_delete_tool_classifies_sink(taxonomy: Taxonomy) -> None:
+    """Phase 3 added 'gmail_delete' pattern — GmailDeleteTool now classifies SINK."""
+    entry = taxonomy.classify("GmailDeleteTool")
+    assert entry is not None, "GmailDeleteTool must classify after Phase 3 taxonomy addition"
+    assert entry.classification == ToolClassification.SINK
+    assert entry.pattern == "gmail_delete"
 
 
 def test_calculator_tool_stays_neutral(taxonomy: Taxonomy) -> None:
