@@ -10,7 +10,12 @@ from pathlib import Path
 from agentic_guard.analysis.symbol_table import PackageSymbolTable
 from agentic_guard.ir import Agent, Finding, SourceLocation, Tool
 from agentic_guard.notebook import load_notebook
-from agentic_guard.parsers import CrewAIParser, LangGraphParser, OpenAIAgentsParser
+from agentic_guard.parsers import (
+    CrewAIParser,
+    LangGraphParser,
+    LlamaIndexParser,
+    OpenAIAgentsParser,
+)
 from agentic_guard.parsers.base import FrameworkParser, ScanContext
 from agentic_guard.rules import all_rules
 from agentic_guard.rules.base import Rule, RuleContext
@@ -95,6 +100,7 @@ class Scanner:
                 LangGraphParser(taxonomy=self.taxonomy),
                 OpenAIAgentsParser(taxonomy=self.taxonomy),
                 CrewAIParser(taxonomy=self.taxonomy),
+                LlamaIndexParser(taxonomy=self.taxonomy),
             ]
         )
         self.rules: list[Rule] = list(rules) if rules is not None else list(all_rules())
