@@ -108,11 +108,23 @@ def test_agent_workflow_not_double_counted() -> None:
 
     AgentWorkflow is an orchestrator referencing already-detected FunctionAgent
     instances. Counting it as a third agent would double-count.
+
+    Two-part check so the count alone can't pass for the wrong reason:
+    (a) count == 2 — necessary but not sufficient.
+    (b) names == {"BrowserAgent", "WriterAgent"} — proves the right two were
+        detected, not one FunctionAgent + the AgentWorkflow orchestrator.
     """
     _, agents = _parser().parse_file(FIXTURES / "agent_workflow_exclusion.py")
+    # (a) count
     assert len(agents) == 2, (
         f"§3.3 expected exactly 2 agents (two FunctionAgent constructors); "
         f"got {len(agents)} — AgentWorkflow must be excluded as a detection anchor"
+    )
+    # (b) correct identities — rules out FunctionAgent + AgentWorkflow passing as 2
+    names = {a.name for a in agents}
+    assert names == {"BrowserAgent", "WriterAgent"}, (
+        f"§3.3 expected agent names {{'BrowserAgent', 'WriterAgent'}}; "
+        f"got {names} — AgentWorkflow or a missed FunctionAgent in the detected set"
     )
 
 
