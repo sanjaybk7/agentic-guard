@@ -33,6 +33,7 @@ REPOS_DIR   = Path("eval/repos")
 REPORT_PATH = Path("eval/prep_report.json")
 
 EXCLUDED_REPOS: set[str] = {
+    # Original 9 prior-corpus repos (used for PR #4/#5 hand-labeling; not re-scanned)
     "openai/openai-agents-python",
     "langchain-ai/langgraph",
     "crewAIInc/crewAI",
@@ -42,6 +43,9 @@ EXCLUDED_REPOS: set[str] = {
     "neural-maze/agents-towards-production",
     "openai/openai-cookbook",
     "langchain-ai/langchain",
+    # Framework's own example/notebook repo — not a real-world application;
+    # 150 pedagogical-notebook agents would distort corpus metrics.
+    "run-llama/llama_index",
 }
 
 FRAMEWORK_CAPS = {

@@ -1122,17 +1122,6 @@
     "py_file_count": 45
   },
   {
-    "full_name": "run-llama/llama_index",
-    "clone_url": "https://github.com/run-llama/llama_index.git",
-    "default_branch": "main",
-    "sha": "9aa5ee5cd2a1ecff6ffa2a8cd6af46b87af674b9",
-    "framework_tag": "llama-index",
-    "stars": 49975,
-    "collected_at": "2026-06-07T17:35:22.836830+00:00",
-    "agent_count": 0,
-    "py_file_count": 3836
-  },
-  {
     "full_name": "szczyglis-dev/py-gpt",
     "clone_url": "https://github.com/szczyglis-dev/py-gpt.git",
     "default_branch": "master",

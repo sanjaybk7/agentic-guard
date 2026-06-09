@@ -1,12 +1,12 @@
 {
-  "total": 127,
+  "total": 126,
   "framework_distribution": {
     "langgraph": 30,
     "unknown": 34,
     "openai-agents": 21,
     "crewai": 25,
     "autogen": 10,
-    "llama-index": 5,
+    "llama-index": 4,
     "langchain-agents": 2
   },
   "retagged": [
@@ -327,6 +327,12 @@
       "stars": 0,
       "py_files": 2,
       "reason": "0-2 stars and <5 Python files"
+    },
+    {
+      "full_name": "run-llama/llama_index",
+      "stars": 49975,
+      "py_files": 3836,
+      "reason": "Framework's own example/notebook repo \u2014 not a real-world application; 150 pedagogical-notebook agents would distort corpus metrics."
     }
   ],
   "added_replacements": [
