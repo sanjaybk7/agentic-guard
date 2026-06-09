@@ -229,15 +229,10 @@ requirements/config. The zero is correct and expected.
 | jgravelle/AutoGroq | Generates AutoGen config files as output (meta-tool); doesn't run AutoGen |
 | vstorm-co/full-stack-ai-agent-template | Cookiecutter scaffolding template; StateGraph is in `{{cookiecutter.project_slug}}/` — template code, not running app |
 | microsoft/spec-to-agents | `AgentExecutor` appears only in tests; main code generates agent specs, doesn't run them |
-| ag2ai/Agents_Failure_Attribution | failure attribution; requirement-level autogen dep, no construction |
 | vortezwohl/Autono | IS the Autono framework library; no consumer application |
-| Undertone0809/promptulate (re-check) | IS the promptulate framework library; exports AssistantAgent but is the library itself |
-| TuanaCelik... | (covered above in uncovered) |
-
-Wait — Undertone0809/promptulate is in BOTH uncovered and genuine non-agent. Correcting:
-Undertone0809/promptulate → uncovered (it's the promptulate library which wraps AutoGen internally, but the library IS a user-facing agent framework). Moving it to uncovered.
-
-| vortezwohl/Autono | IS the Autono agent framework library itself — not a consumer app |
+| Upsonic/Tiger | No agent framework imports or constructor patterns found |
+| hammadyaqoob1985/langchain-course-react-langchain | LangChain course tutorial; no agent constructor found |
+| hammadyaqoob1985/langchain-course-react-langchain-with-tool-calling | LangChain course tutorial with tool-calling; no agent constructor found |
 
 ---
 
@@ -286,3 +281,18 @@ Ranked by corpus prevalence:
 
 6. **OpenAI SDK subclass** (1 repo): A targeted fix — add `ResearchAgent` or expand
    `_AGENT_CLASSES` to include common subclass names, or track inheritance at AST level.
+
+---
+
+## Reconciliation
+
+| Bucket | Count |
+|--------|------:|
+| Repos with agents detected (agent_count ≥ 1) | 66 |
+| True remaining gap (real agents, undetected) | 31 |
+| Genuine non-agent repos (correct zeros) | 29 |
+| **TOTAL** | **126** |
+
+**66 + 31 + 29 = 126 ✓**
+
+_Zero-agent breakdown check: 14 runtime-indirect + 17 uncovered + 29 genuine non-agent = 60 zero-agent repos; 66 + 60 = 126 ✓_
