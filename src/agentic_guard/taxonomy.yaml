@@ -83,6 +83,100 @@ sources:
     privilege: 0
     trust_of_output: mixed
 
+  # --- Phase 3 additions (2026-06-09) ---
+  # Derived from corpus scan (eval/taxonomy_tool_inventory.md, eval-corpus branch)
+  # and Phase 2 code inspection of liangdabiao/crewai_stock_analysis_system,
+  # liangdabiao/easy_investment_Agent_crewai, and
+  # lesteroliver911/llamaindex-agentworkflow-browse-agent.
+  # Token-set matcher (Phase 1) enables all PascalCase entries below.
+  - pattern: serper
+    privilege: 0
+    trust_of_output: untrusted
+    rationale: "Serper.dev Google Search API; results contain attacker-influenced content."
+  - pattern: baidu_search
+    privilege: 0
+    trust_of_output: untrusted
+    rationale: "Baidu web search API."
+  - pattern: search_internet
+    privilege: 0
+    trust_of_output: untrusted
+  - pattern: youtube
+    privilege: 0
+    trust_of_output: untrusted
+    rationale: "YouTube search/metadata APIs; external untrusted content."
+  - pattern: fetch_latest_videos
+    privilege: 0
+    trust_of_output: untrusted
+  - pattern: fire_crawl
+    privilege: 0
+    trust_of_output: untrusted
+    rationale: "Firecrawl web crawling API."
+  - pattern: duckduckgo
+    privilege: 0
+    trust_of_output: untrusted
+  - pattern: exa
+    privilege: 0
+    trust_of_output: untrusted
+    rationale: "Exa AI search engine (exact-match only — token length 3 < 4)."
+  - pattern: instagram
+    privilege: 0
+    trust_of_output: untrusted
+  - pattern: mdx_search
+    privilege: 0
+    trust_of_output: mixed
+    rationale: "Searches MDX documentation files; trust mixed (docs may include external text)."
+  - pattern: knowledge_search
+    privilege: 0
+    trust_of_output: mixed
+    rationale: "Knowledge-base search (RAG-style); index can be poisoned."
+  - pattern: directory_read
+    privilege: 1
+    trust_of_output: mixed
+    rationale: "Reads files from a directory path; reveals filesystem contents."
+  - pattern: pdf_search
+    privilege: 1
+    trust_of_output: mixed
+    rationale: "Searches within PDFs; PDFs can embed adversarial text."
+  - pattern: rag_tool
+    privilege: 0
+    trust_of_output: mixed
+    rationale: "RAG retrieval tool; index can be poisoned via document ingestion."
+  - pattern: market_sentiment
+    privilege: 0
+    trust_of_output: untrusted
+  - pattern: financial_analysis
+    privilege: 0
+    trust_of_output: untrusted
+    rationale: "Confirmed live financial API calls (e.g. AkShare stock_financial_analysis_indicator)."
+  - pattern: stock_data
+    privilege: 0
+    trust_of_output: untrusted
+    rationale: "Fetches live stock market data from external financial API."
+  - pattern: navigate_to
+    privilege: 0
+    trust_of_output: untrusted
+    rationale: "Browser navigation; loaded page content is attacker-controlled."
+  - pattern: open_page
+    privilege: 0
+    trust_of_output: untrusted
+    rationale: "Opens a web page; page content is attacker-controlled."
+  - pattern: search_text
+    privilege: 0
+    trust_of_output: untrusted
+    rationale: "Searches for text on an active browser page (attacker-controlled HTML)."
+  - pattern: take_screenshot
+    privilege: 0
+    trust_of_output: mixed
+    rationale: "Captures browser page state; page may display attacker-controlled content."
+  - pattern: vision_tool
+    privilege: 1
+    trust_of_output: mixed
+    rationale: "Reads image from file or URL into agent context; image may carry adversarial content."
+  - pattern: add_image_local
+    privilege: 1
+    trust_of_output: mixed
+    rationale: "Reads local image file and base64-encodes it into agent context."
+
 sinks:
   - pattern: send_email
     privilege: 2
@@ -153,8 +247,44 @@ sinks:
     privilege: 2
     reversible: false
 
+  # --- Phase 3 additions (2026-06-09) ---
+  - pattern: data_export
+    privilege: 2
+    reversible: true
+    rationale: "Writes data to local filesystem (json/csv/excel/txt); confirmed from corpus code."
+  - pattern: slack_notification
+    privilege: 2
+    reversible: false
+    rationale: "Sends Slack notification to channel; irreversible, visible to other parties."
+  - pattern: gmail_delete
+    privilege: 2
+    reversible: true
+    rationale: "Deletes Gmail messages to recoverable trash."
+  - pattern: empty_trash
+    privilege: 3
+    reversible: false
+    rationale: "Permanently destroys all trashed emails; bulk irreversible data deletion."
+  - pattern: save_pdf
+    privilege: 2
+    reversible: true
+    rationale: "Writes PDF file to disk."
+  - pattern: add_video_vector_db
+    privilege: 1
+    reversible: true
+    rationale: "Writes video embedding to vector database; reversible (entry can be deleted)."
+  - pattern: click_element
+    privilege: 2
+    reversible: true
+    rationale: "Browser element click; can trigger form submissions or account state changes."
+
 both:
   - pattern: query_user_db
     privilege: 2
     trust_of_output: mixed
     reversible: true
+  # --- Phase 3 additions (2026-06-09) ---
+  - pattern: gmail_organize
+    privilege: 1
+    trust_of_output: mixed
+    reversible: true
+    rationale: "Reads email metadata (untrusted SOURCE) and archives/labels/moves messages (SINK); reversible."
