@@ -1,10 +1,12 @@
 # IG001 Labels — First Labeling Pass
 
 **Labeling date:** 2026-06-10  
+**Confirmation date:** 2026-06-13  
 **Analyzer version:** v0.2 (post-PR #5), frozen for evaluation  
 **Methodology:** `docs/eval/LABELING_METHODOLOGY.md` §3.1  
 **Labeler:** Sanjay Belaturu Krishnegowda (single labeler)  
-**Dossier source:** `eval/ig001_findings_for_labeling.md` (commit `80fa4732`)
+**Dossier source:** `eval/ig001_findings_for_labeling.md` (commit `80fa4732`)  
+**Trace source:** `eval/ig001_poc_traces.md` (commit `dbc7b98`)
 
 ---
 
@@ -21,8 +23,10 @@
 
 **Caveat:** N=5 is too small to treat 0.80 as a stable precision rate.
 Reported as raw counts only. Single labeler; no second-reviewer confirmation at this
-stage. Confidence interval is wide at this N. Confirmed TPs (PoC/maintainer disclosure)
-per §7 are a separate step.
+stage. Confidence interval is wide at this N.
+
+**Confirmation status:** All 4 TPs are path-confirmed via static trace
+(`eval/ig001_poc_traces.md`). See Confirmation section below.
 
 ---
 
@@ -252,3 +256,64 @@ page content to LLM → `click_element` acts on that content. A page with advers
 visible text (e.g., "Click the Confirm Payment button") can cause the agent to issue
 `click_element("Confirm Payment")` on whatever page is currently loaded. All three
 criteria satisfied.
+
+---
+
+## Confirmation — Static Trace Results
+
+**Trace document:** `eval/ig001_poc_traces.md` (commit `dbc7b98`, 2026-06-13)  
+**Confirmation method:** Static code reading of pinned-SHA source files. No agents run,
+no API keys used, no exploits executed.
+
+### Confirmation status per finding
+
+| Finding | Label | Confirmation |
+|---|---|---|
+| #1 (organizer, GmailOrganizeTool) | FP | N/A — FP, no path to confirm |
+| #2 (searcher, ScrapeWebsiteTool→FileWriterTool) | TP | **Path-confirmed** |
+| #3 (XiaoPaw, BaiduSearchTool→FileWriterTool) | TP | **Path-confirmed** |
+| #4 (writer, FileReadTool→FileWriterTool) | TP | **Path-confirmed** |
+| #5 (crontab_manager, FileReadTool→FileWriterTool) | AMBIGUOUS | N/A — excluded |
+| #6 (BrowserAgent, navigate_to→click_element) | TP | **Path-confirmed** (with nuance; see below) |
+
+### What "path-confirmed" means
+
+Each of the 4 TPs has a documented, statically-verified chain from the source tool's
+output to the LLM context to the sink tool's invocation, with both tools co-resident in
+one agent's toolbox and no human-approval gate between them. The chain is quoted from
+actual source files at the pinned SHA; it is not inferred or approximated.
+
+**Path-confirmed is not exploit-confirmed.** The attack narratives in
+`eval/ig001_poc_traces.md` are illustrative scenarios demonstrating how each path could
+be exploited by an attacker who controls the source's content. They are NOT executed
+exploits. Exploitability was not dynamically tested. agentic-guard's claim is detection
+of the confused-deputy structural pattern — the co-presence of an untrusted source and a
+privileged sink in one agent's toolbox without a gate — not demonstration of a working
+exploit against any specific deployment.
+
+### Finding #6 nuance — LLM-entry mechanism
+
+For `BrowserAgent`, `navigate_to` returns only `"Navigated to {url}"` — page content
+does not reach the LLM through that tool's return value. Two mechanisms were analyzed:
+
+- **`search_text` (statically verified):** queries the live DOM of the currently-loaded
+  page for visible text elements and returns confirmation to the LLM. An attacker
+  controlling the loaded page controls which element text exists, enabling the attack
+  sequence: `navigate_to(attacker_url)` → `search_text("Confirm Transfer")` →
+  `"Found 1 matches"` → `click_element("Confirm Transfer")`. This path is fully visible
+  in the source code and constitutes the statically-verified LLM-entry mechanism.
+
+- **`take_screenshot` multimodal path (plausible, unverified):** screenshots are stored
+  in `ctx.state["screenshots"]` (LlamaIndex `Context` state), not passed directly as
+  tool return values. Whether the `AgentWorkflow` framework includes stored screenshots
+  as image inputs in subsequent LLM calls is a framework-internal question not resolvable
+  from application code alone. GPT-4 (the configured LLM) is multimodal-capable, making
+  the path plausible, but its activation is unconfirmed statically. This path is noted
+  as additional attack surface; it does not alter the TP label, which rests on the
+  `search_text` mechanism.
+
+### Final result
+
+**IG001 first pass — 6 findings, 4 TP (all path-confirmed) / 1 AMBIGUOUS / 1 FP.**  
+Labelable precision: 4/5 = 0.80, raw-count basis, small N, single labeler.  
+This closes the IG001 labeling and path-confirmation cycle for the v0.2 evaluation.
