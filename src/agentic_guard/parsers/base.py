@@ -46,6 +46,33 @@ KNOWN_STATIC_NAMES: frozenset[str] = frozenset({
     "RECOMMENDED_PROMPT_PREFIX",
 })
 
+# Curated allowlist of pure-static-string-composing functions. When such a
+# function is called with arguments whose Names all resolve to static
+# bindings, the call result is treated as a static string.
+#
+# An entry here is a strong claim: the function takes only string-typed
+# arguments, returns `str` (NOT a Callable/closure), and its body composes
+# the return value exclusively from its arguments and module-level string
+# constants (no closure capture of runtime state, no I/O, no calls to
+# unknown functions). Wrong entries silently classify a runtime-dynamic
+# call as static and let IG002 miss a real TP.
+#
+# History: a broader "all argument Names resolve → static" rule was
+# implemented in PR #12 and reverted because it silenced callables that
+# return closures capturing external state (e.g. `make_prompt` patterns
+# where the returned closure embeds `state["user_input"]`). This explicit
+# allowlist is the safe replacement: only specifically-audited composer
+# functions short-circuit.
+STATIC_COMPOSER_FUNCTIONS: frozenset[str] = frozenset({
+    # study8677/OpenCMO — `agents/prompt_contracts.py::build_prompt`.
+    # Keyword-only `str | None` arguments; returns `str`; body is
+    # `"\n\n".join([...module-level string constants and the literal
+    # keyword args...])`. No closure, no runtime data, no external I/O.
+    # Verified by source audit at the corpus-pinned SHA. Fires the
+    # KL-002 cluster (F01-F05 in eval/ig002_labels.md).
+    "build_prompt",
+})
+
 
 @dataclass
 class ScanContext:
@@ -362,16 +389,21 @@ def classify_prompt_expr(
             if all(_resolves_static(module, n) for n in arg_names):
                 return False, []
             return True, [n for n in arg_names if not _resolves_static(module, n)]
-        # Generic Call: mirror the .format() short-circuit. If every Name
-        # in the call expression — the callee plus every argument — resolves
-        # to a static binding (module constant, function def, cross-module
-        # export, or allowlisted SDK constant), the result is static.
-        # Otherwise stay dynamic with unresolved names as taints.
-        # Safety: this is a narrowing rule — it only marks Static when all
-        # names provably resolve. If any name is unresolvable the result
-        # stays Dynamic, preserving the existing TP detection surface.
+        # Generic Call: stay dynamic by default. The previous "all Names
+        # resolve → static" short-circuit silenced any closure-returning
+        # callable invoked with literal args (e.g. `make_prompt("...")`
+        # where the returned closure captures external runtime state); the
+        # rule had no visibility into the returned object and produced
+        # false negatives. Replaced with the explicit
+        # `STATIC_COMPOSER_FUNCTIONS` allowlist: a Call short-circuits to
+        # Static only when the callee is a known pure string composer AND
+        # every Name in the call expression resolves to a static binding.
+        # Everything else stays Dynamic with filtered taints.
         all_names = names_in(expr)
-        if all(_resolves_static(module, n) for n in all_names):
+        if (
+            func_name in STATIC_COMPOSER_FUNCTIONS
+            and all(_resolves_static(module, n) for n in all_names)
+        ):
             return False, []
         return True, [n for n in all_names if not _resolves_static(module, n)]
 

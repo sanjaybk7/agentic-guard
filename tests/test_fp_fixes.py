@@ -56,12 +56,43 @@ def test_openai_dynamic_prompt_still_fires() -> None:
 # the narrowing didn't bleed into a real injection pattern.
 
 
-def test_callable_static_composition_no_findings() -> None:
-    """KL-002: Agent(instructions=build_prompt(base_instructions="literal"))
-    must not fire IG002 when the callee and every argument name resolves.
+def test_static_composer_allowlisted_no_findings() -> None:
+    """KL-002 (narrowed): Agent(instructions=build_prompt(base_instructions="lit"))
+    must not fire IG002 — ``build_prompt`` is in ``STATIC_COMPOSER_FUNCTIONS``
+    and all argument Names resolve.
     """
     assert "IG002" not in _rule_ids(
         FIXTURES / "safe" / "callable_static_composition.py"
+    )
+
+
+def test_closure_captures_external_state_still_fires() -> None:
+    """KL-002 (FN regression): a ``make_prompt``-style callable that returns a
+    closure capturing external state (e.g. ``state['user_input']``) MUST fire
+    IG002. The broader pre-narrow rule silenced this; the explicit allowlist
+    fixes it. If this test ever stops firing, the false negative has been
+    reintroduced.
+    """
+    assert "IG002" in _rule_ids(
+        FIXTURES / "vulnerable" / "closure_captures_external.py"
+    ), (
+        "Closure-with-external-content silenced — KL-002 broad rule has "
+        "regressed. The ``STATIC_COMPOSER_FUNCTIONS`` allowlist must remain "
+        "the only path to short-circuit a generic Call."
+    )
+
+
+def test_generic_callable_literal_args_still_fires() -> None:
+    """A non-allowlisted callable invoked with literal args MUST fire IG002.
+    The engine cannot see what an arbitrary function returns; the conservative
+    default is Dynamic. Only specifically-audited entries in
+    ``STATIC_COMPOSER_FUNCTIONS`` short-circuit.
+    """
+    assert "IG002" in _rule_ids(
+        FIXTURES / "vulnerable" / "generic_call_literal_args.py"
+    ), (
+        "Non-allowlisted callable with literal args silenced — the broad "
+        "pre-narrow rule has regressed."
     )
 
 
