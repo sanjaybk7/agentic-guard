@@ -2,11 +2,15 @@
 constants and literal arguments.
 
 KL-002 pattern: ``instructions=build_prompt(base_instructions="literal")``
-where ``build_prompt`` is a function defined in the same module (or
-cross-module-importable function def). With Fix 1 (generic Call short-
-circuit), when every Name in the call expression — the callee and the
-arguments — resolves to a static binding, the call result is treated as
-static. Must NOT fire IG002.
+where ``build_prompt`` is allowlisted in ``STATIC_COMPOSER_FUNCTIONS`` —
+it takes only string-typed arguments, returns ``str`` by composing them
+with module-level string constants, and contains no closure or runtime
+data. Must NOT fire IG002.
+
+A broader rule that silenced any Call whose argument Names all resolve
+was replaced with this explicit allowlist after the rule produced false
+negatives on closure-returning callables (see
+``vulnerable/closure_captures_external.py``).
 """
 
 from agents import Agent, function_tool
