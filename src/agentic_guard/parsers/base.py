@@ -26,6 +26,26 @@ SAFE_PROMPT_HELPERS: frozenset[str] = frozenset({
     "prompt_with_handoff_instructions",
 })
 
+# Curated allowlist of third-party SDK module-level constants that are
+# verified-static strings at their origin. Used as a final fallback when
+# cross-module resolution can't reach an installed package's source. Each
+# entry MUST be a fixed string literal in its origin SDK — a wrong entry
+# silently classifies a runtime-variable name as static and lets IG002 miss
+# a real TP. Resolution is gated by import presence in the calling file
+# (see `ModuleContext._resolves_at_module`) so a same-named locally-defined
+# value won't accidentally pick up the allowlist trust.
+#
+# Provenance for each entry must be recorded inline. Add new entries only
+# after auditing the SDK source.
+KNOWN_STATIC_NAMES: frozenset[str] = frozenset({
+    # OpenAI Agents SDK — `agents.extensions.handoff_prompt`.
+    # Source: github.com/openai/openai-agents-python. The SDK defines this
+    # as a fixed module-level `str` literal prepended to sub-agent
+    # instructions during a handoff. No runtime mutation in any released
+    # version surveyed.
+    "RECOMMENDED_PROMPT_PREFIX",
+})
+
 
 @dataclass
 class ScanContext:
@@ -220,8 +240,20 @@ class ModuleContext:
     def _resolves_at_module(self, name: str) -> bool:
         if name in self.string_constants or name in self.function_defs:
             return True
-        if self.cross_module is not None and self.cross_module.resolves_to_static(name):
-            return True
+        if self.cross_module is not None:
+            if self.cross_module.resolves_to_static(name):
+                return True
+            # KNOWN_STATIC_NAMES fallback: a curated allowlist of third-party
+            # SDK constants whose source is not in the scan corpus and so
+            # can't be resolved via the symbol table. Gated by import
+            # presence — we only honor the allowlist if this file actually
+            # imported the name. A local same-named binding (no import)
+            # falls through and stays dynamic.
+            if (
+                name in KNOWN_STATIC_NAMES
+                and name in self.cross_module.direct_imports
+            ):
+                return True
         return False
 
 
@@ -330,8 +362,32 @@ def classify_prompt_expr(
             if all(_resolves_static(module, n) for n in arg_names):
                 return False, []
             return True, [n for n in arg_names if not _resolves_static(module, n)]
+        # Generic Call: mirror the .format() short-circuit. If every Name
+        # in the call expression — the callee plus every argument — resolves
+        # to a static binding (module constant, function def, cross-module
+        # export, or allowlisted SDK constant), the result is static.
+        # Otherwise stay dynamic with unresolved names as taints.
+        # Safety: this is a narrowing rule — it only marks Static when all
+        # names provably resolve. If any name is unresolvable the result
+        # stays Dynamic, preserving the existing TP detection surface.
         all_names = names_in(expr)
+        if all(_resolves_static(module, n) for n in all_names):
+            return False, []
         return True, [n for n in all_names if not _resolves_static(module, n)]
+
+    if isinstance(expr, ast.IfExp):
+        # Ternary X if cond else Y. Content-staticness depends only on the
+        # branches: a ternary between two literal constants IS static
+        # regardless of which branch the runtime takes. The test condition
+        # (cond) doesn't introduce content — it only chooses between
+        # already-classified branches. If either branch is dynamic, the
+        # expression is dynamic; we union unresolved names from both
+        # branches as taints.
+        body_dyn, body_taints = classify_prompt_expr(expr.body, module)
+        else_dyn, else_taints = classify_prompt_expr(expr.orelse, module)
+        if not body_dyn and not else_dyn:
+            return False, []
+        return True, body_taints + else_taints
 
     if isinstance(expr, ast.Name):
         if _resolves_static(module, expr.id):
