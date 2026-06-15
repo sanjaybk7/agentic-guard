@@ -10,11 +10,11 @@ without reference to scanner output.
 3. Record your reasoning. Do NOT refer to scanner results.
 
 **Selection:** 12 repos, stratified by framework, seed=42.
-Allocations: langgraph=5, openai-agents=7.
+Allocations: langgraph=3, openai-agents=4, crewai=4, llama-index=1.
 
 **Coverage note (extraction, not scanner output):**
-- 7 of 12 repos yielded agents with resolvable tool lists.
-- 46 of 167 detected agent definitions have tool lists.
+- 8 of 12 repos yielded agents with resolvable tool lists.
+- 60 of 211 detected agent definitions have tool lists.
 - Agents omitted: either no `tools=[...]` argument at call site, or tools imported from
   an unresolved package (e.g., SDK-built WebSearchTool, activity_as_tool wrappers).
 - Repos with 0 auditable agents: the gap is a parser coverage limit, not evidence of safety.
@@ -122,31 +122,160 @@ Allocations: langgraph=5, openai-agents=7.
 - **`add`** — Add two numbers.
 - **`multiply`** — Multiply two numbers.
 
-## Repo 04: `nuglifeleoji/Options-Analytics-Agent`
+## Repo 04: `jkmaina/openai-agents-blueprint`
 
-- **Framework:** langgraph
-- **Pinned SHA:** `9de22c3184598440ae2209be87bcd764bd1349af`
-- **Agent definitions found:** 1 total; 1 with tool lists; 1 shown
+- **Framework:** openai-agents
+- **Pinned SHA:** `76cbbcb41a938531a9b85375210ed328d9014606`
+- **Agent definitions found:** 122 total; 31 with tool lists; 15 shown (capped at 15)
+  _(Note: 91 agent definitions with no `tools=[...]` argument omitted — not auditable for IG001.)_
 
-### Agent 04.1: `create_react_agent`
+### Agent 04.1: `Enterprise Vision Analyst`
 
-- **Definition:** `Week1/start-prebuiltagent.py:12`
-- **Human gate:** `checkpointer=<set>`
+- **Definition:** `chapter8/advanced_multi-modal.py:282`
+- **Human gate:** none detected
+
+**Tools (3):**
+
+- **`fetch_and_analyze_image`** — Fetch an online image and prepare it for analysis.
+- **`validate_image_quality`** — Validate image quality and technical specifications.
+- **`escalate_vision_analysis`** — Escalate vision analysis to human review when confidence is low.
+
+### Agent 04.2: `Customer Service Assistant`
+
+- **Definition:** `chapter8/observability.py:165`
+- **Human gate:** none detected
+
+**Tools (3):**
+
+- **`get_weather`** — Get current weather information for a city.
+- **`get_time`** — Get current time - quick internal operation
+- **`calculate_tip`** — Calculate tip amount for a given bill - computational task
+
+### Agent 04.3: `Enterprise Customer Service AI`
+
+- **Definition:** `chapter8/custom_metrics.py:350`
+- **Human gate:** none detected
+
+**Tools (5):**
+
+- **`get_weather`** — Get current weather information for a city.
+- **`get_time`** — Get current time - quick internal operation
+- **`calculate_tip`** — Calculate tip amount for a given bill - computational task
+- **`search_knowledge_base`** — Search internal knowledge base - simulates complex retrieval
+- **`escalate_to_human`** — Escalate complex issues to human agents
+
+### Agent 04.4: `Agent`
+
+- **Definition:** `chapter1/14_production_example.py:138`
+- **Human gate:** none detected
+
+**Tools (2):**
+
+- **`get_user_info`** — Example tool that accesses user context.
+- **`log_interaction`** — Log interaction for audit purposes.
+
+### Agent 04.5: `MemoAssistant`
+
+- **Definition:** `chapter1/12_advanced_context_memory.py:54`
+- **Human gate:** none detected
+
+**Tools (2):**
+
+- **`remember_fact`** — Store a user-supplied fact in long-term memory.
+- **`recall_facts`** — Return everything the assistant knows so far.
+
+### Agent 04.6: `PersonalAssistant`
+
+- **Definition:** `chapter1/11_context_memory.py:51`
+- **Human gate:** none detected
 
 **Tools (1):**
 
-- **`get_weather`** — Get weather for a given city.
+- **`get_user_preference`** — user = wrapper.context
 
-## Repo 05: `agentscope-ai/agentscope-runtime`
+### Agent 04.7: `Data Analyst`
 
-- **Framework:** langgraph
-- **Pinned SHA:** `22072fd7075ce0c6f43cb39509d6a14b0e60ddb5`
-- **Agent definitions found:** 1 total; 0 with tool lists; 0 shown
-  _(Note: 1 agent definitions with no `tools=[...]` argument omitted — not auditable for IG001.)_
+- **Definition:** `chapter6/03_code_interpreter.py:17`
+- **Human gate:** none detected
 
-_No agents with resolvable tool lists found in this repo._
+**Tools (1):**
 
-## Repo 06: `hellotinah/financial_agent`
+- **`<CodeInterpreterTool(...)>`** — (no description found)
+
+### Agent 04.8: `Math Tutor`
+
+- **Definition:** `chapter6/03_code_interpreter.py:33`
+- **Human gate:** none detected
+
+**Tools (1):**
+
+- **`<CodeInterpreterTool(...)>`** — (no description found)
+
+### Agent 04.9: `Creative Assistant`
+
+- **Definition:** `chapter6/05_image_generation.py:17`
+- **Human gate:** none detected
+
+**Tools (1):**
+
+- **`<ImageGenerationTool(...)>`** — (no description found)
+
+### Agent 04.10: `Marketing Designer`
+
+- **Definition:** `chapter6/05_image_generation.py:34`
+- **Human gate:** none detected
+
+**Tools (1):**
+
+- **`<ImageGenerationTool(...)>`** — (no description found)
+
+### Agent 04.11: `Concept Artist`
+
+- **Definition:** `chapter6/05_image_generation.py:51`
+- **Human gate:** none detected
+
+**Tools (1):**
+
+- **`<ImageGenerationTool(...)>`** — (no description found)
+
+### Agent 04.12: `Document Assistant`
+
+- **Definition:** `chapter6/04_file_search.py:17`
+- **Human gate:** none detected
+
+**Tools (1):**
+
+- **`<FileSearchTool(...)>`** — (no description found)
+
+### Agent 04.13: `Legal Research Assistant`
+
+- **Definition:** `chapter6/04_file_search.py:32`
+- **Human gate:** none detected
+
+**Tools (1):**
+
+- **`<FileSearchTool(...)>`** — (no description found)
+
+### Agent 04.14: `Policy Analyst`
+
+- **Definition:** `chapter6/04_file_search.py:47`
+- **Human gate:** none detected
+
+**Tools (1):**
+
+- **`<FileSearchTool(...)>`** — (no description found)
+
+### Agent 04.15: `Content Analyst`
+
+- **Definition:** `chapter6/06_async_tools.py:120`
+- **Human gate:** none detected
+
+**Tools (2):**
+
+- **`fetch_random_post`** — Fetch a random post from JSONPlaceholder API.
+- **`fetch_user_info`** — Fetch user information from JSONPlaceholder API.
+
+## Repo 05: `hellotinah/financial_agent`
 
 - **Framework:** openai-agents
 - **Pinned SHA:** `126c15ceb7644269610edd37d11f66daa5828122`
@@ -155,41 +284,50 @@ _No agents with resolvable tool lists found in this repo._
 
 _No agents with resolvable tool lists found in this repo._
 
-## Repo 07: `temporal-community/openai-agents-sdk-deep-research-demo`
+## Repo 06: `temporal-community/openai-agents-demos`
 
 - **Framework:** openai-agents
-- **Pinned SHA:** `c0761d82cfff65f972c333418b353215832c2f41`
-- **Agent definitions found:** 8 total; 3 with tool lists; 3 shown
-  _(Note: 5 agent definitions with no `tools=[...]` argument omitted — not auditable for IG001.)_
+- **Pinned SHA:** `ee5f871b48cb26ec28239ef7a4719ab10c4903e8`
+- **Agent definitions found:** 10 total; 4 with tool lists; 4 shown
+  _(Note: 6 agent definitions with no `tools=[...]` argument omitted — not auditable for IG001.)_
 
-### Agent 07.1: `ImageGenAgent`
+### Agent 06.1: `Hello world`
+
+- **Definition:** `openai_agents/workflows/tools_workflow.py:16`
+- **Human gate:** none detected
+
+**Tools (1):**
+
+- **`<activity_as_tool(...)>`** — Wraps a Temporal workflow activity as a callable tool.
+
+### Agent 06.2: `ImageGenAgent`
 
 - **Definition:** `openai_agents/workflows/research_agents/imagegen_agent.py:61`
 - **Human gate:** none detected
 
 **Tools (1):**
 
-- **`<activity_as_tool(...)>`** — (no description found)
+- **`<activity_as_tool(...)>`** — Wraps a Temporal workflow activity as a callable tool.
 
-### Agent 07.2: `PDFGeneratorAgent`
+### Agent 06.3: `PDFGeneratorAgent`
 
-- **Definition:** `openai_agents/workflows/research_agents/pdf_generator_agent.py:46`
+- **Definition:** `openai_agents/workflows/research_agents/pdf_generator_agent.py:49`
 - **Human gate:** none detected
 
 **Tools (1):**
 
-- **`<activity_as_tool(...)>`** — (no description found)
+- **`<activity_as_tool(...)>`** — Wraps a Temporal workflow activity as a callable tool.
 
-### Agent 07.3: `Search agent`
+### Agent 06.4: `Search agent`
 
-- **Definition:** `openai_agents/workflows/research_agents/search_agent.py:20`
+- **Definition:** `openai_agents/workflows/research_agents/search_agent.py:15`
 - **Human gate:** none detected
 
 **Tools (1):**
 
-- **`<WebSearchTool(...)>`** — (no description found)
+- **`<WebSearchTool(...)>`** — Web search — returns live search results for a query.
 
-## Repo 08: `Shaurya-Sethi/circuitron`
+## Repo 07: `Shaurya-Sethi/circuitron`
 
 - **Framework:** openai-agents
 - **Pinned SHA:** `6e2be932deab505464b62e1981eec55c997e8859`
@@ -198,200 +336,208 @@ _No agents with resolvable tool lists found in this repo._
 
 _No agents with resolvable tool lists found in this repo._
 
-## Repo 09: `PacktPublishing/Building-Agents-with-OpenAI-Agents-SDK`
-
-- **Framework:** openai-agents
-- **Pinned SHA:** `f49a98d003a911201c471970ef896c190344b083`
-- **Agent definitions found:** 94 total; 32 with tool lists; 15 shown (capped at 15)
-  _(Note: 62 agent definitions with no `tools=[...]` argument omitted — not auditable for IG001.)_
-
-### Agent 09.1: `Customer service agent`
-
-- **Definition:** `Chapter8/input_guardrail.py:49`
-- **Human gate:** none detected
-
-**Tools (1):**
-
-- **`get_order_status`** — Returns the status of an order given the customer's Order ID
-
-### Agent 09.2: `Customer service agent`
-
-- **Definition:** `Chapter8/input_guardrail_agent.py:62`
-- **Human gate:** none detected
-
-**Tools (1):**
-
-- **`get_order_status`** — Returns the status of an order given the customer's Order ID
-
-### Agent 09.3: `Customer service agent`
-
-- **Definition:** `Chapter8/test_end_to_end.py:31`
-- **Human gate:** none detected
-
-**Tools (1):**
-
-- **`get_order_status`** — Returns the status of an order given the customer's Order ID
-
-### Agent 09.4: `Physics Agent`
-
-- **Definition:** `Chapter8/visualization.py:15`
-- **Human gate:** none detected
-
-**Tools (1):**
-
-- **`calculate_physics_equation`** — pass
-
-### Agent 09.5: `Culture Agent`
-
-- **Definition:** `Chapter8/visualization.py:22`
-- **Human gate:** none detected
-
-**Tools (1):**
-
-- **`perform_culture_survey`** — pass
-
-### Agent 09.6: `Research`
-
-- **Definition:** `Chapter8/nested_spans.py:16`
-- **Human gate:** none detected
-
-**Tools (1):**
-
-- **`get_fun_facts`** — return 'The Eiffel Tower is in Paris'
-
-### Agent 09.7: `Text Generation`
-
-- **Definition:** `Chapter8/nested_spans.py:23`
-- **Human gate:** none detected
-
-**Tools (1):**
-
-- **`clean_up_poem`** — return poem_string.upper()
-
-### Agent 09.8: `Triage Agent`
-
-- **Definition:** `Chapter6/dynamic_approach.py:12`
-- **Human gate:** none detected
-
-**Tools (2):**
-
-- **`complaints_agent.as_tool`** — [sub-agent wrapping: [agent: Complaints Agent]]
-- **`inquiry_agent.as_tool`** — [sub-agent wrapping: [agent: General Inquiry Agent]]
-
-### Agent 09.9: `Shipping Support Agent`
-
-- **Definition:** `Chapter7/local_context.py:25`
-- **Human gate:** none detected
-
-**Tools (1):**
-
-- **`get_shipping_status`** — Provide the shipping status for the current order.
-
-### Agent 09.10: `QuestionAnswer`
-
-- **Definition:** `Chapter5/ltm_structured_memory_recall.py:50`
-- **Human gate:** none detected
-
-**Tools (2):**
-
-- **`save_memory`** — Saves a memory to a memory store.
-- **`load_memory`** — Loads a set of memory from a memory store.
-
-### Agent 09.11: `USConstitutionTool`
-
-- **Definition:** `Chapter5/us_constitution_agent.py:7`
-- **Human gate:** none detected
-
-**Tools (1):**
-
-- **`filesearchtool`** — (no description found)
-
-### Agent 09.12: `Customer service agent`
-
-- **Definition:** `Chapter3/customer_service_agent.py:37`
-- **Human gate:** none detected
-
-**Tools (1):**
-
-- **`get_order_status`** — Returns the status of an order given the customer's Order ID
-
-### Agent 09.13: `MortgageAdvisor`
-
-- **Definition:** `Chapter4/mortgage_agent_force_tool_use.py:27`
-- **Human gate:** `tool_use_behavior='stop_on_first_tool'`
-
-**Tools (1):**
-
-- **`calculate_mortgage`** — This function calculates the mortgage payment.
-
-### Agent 09.14: `WebTool`
-
-- **Definition:** `Chapter4/file_search_tool.py:7`
-- **Human gate:** none detected
-
-**Tools (1):**
-
-- **`filesearchtool`** — (no description found)
-
-### Agent 09.15: `Crypto Agent`
-
-- **Definition:** `Chapter4/mcp_agent.py:14`
-- **Human gate:** none detected
-
-**Tools (1):**
-
-- **`mcp_tool`** — (no description found)
-
-## Repo 10: `OctagonAI/octagon-vc-agents`
-
-- **Framework:** openai-agents
-- **Pinned SHA:** `8af68fe6ea6f921fa17eb2d2ebb1c63c25d3aee1`
-- **Agent definitions found:** 12 total; 2 with tool lists; 2 shown
-  _(Note: 10 agent definitions with no `tools=[...]` argument omitted — not auditable for IG001.)_
-
-### Agent 10.1: `web-search-agent`
-
-- **Definition:** `src/octagon_vc_agents/openai_agents.py:94`
-- **Human gate:** none detected
-
-**Tools (1):**
-
-- **`<WebSearchTool(...)>`** — (no description found)
-
-### Agent 10.2: `Agent`
-
-- **Definition:** `src/octagon_vc_agents/openai_agents.py:111`
-- **Human gate:** none detected
-
-**Tools (11):**
-
-- **`octagon_sec_agent.as_tool`** — [sub-agent wrapping: A helpful agent that can answer questions about the SEC for public companies.]
-- **`octagon_transcripts_agent.as_tool`** — [sub-agent wrapping: A helpful agent that can answer questions about the transcripts of public companies.]
-- **`octagon_stock_data_agent.as_tool`** — [sub-agent wrapping: A helpful agent that can answer questions about the stock market for public companies.]
-- **`octagon_financials_agent.as_tool`** — [sub-agent wrapping: A helpful agent that can answer questions about the financials of public companies.]
-- **`octagon_companies_agent.as_tool`** — [sub-agent wrapping: A helpful agent that can answer questions about the private companies in the Octagon database.]
-- **`octagon_funding_agent.as_tool`** — [sub-agent wrapping: A helpful agent that can answer questions about the funding of public companies.]
-- **`octagon_deals_agent.as_tool`** — [sub-agent wrapping: A helpful agent that can answer questions about the deals of public companies.]
-- **`octagon_investors_agent.as_tool`** — [sub-agent wrapping: A helpful agent that can answer questions about the investors of public companies.]
-- **`octagon_debts_agent.as_tool`** — [sub-agent wrapping: A helpful agent that can answer questions about the debts of public companies.]
-- **`octagon_scraper_agent.as_tool`** — [sub-agent wrapping: A helpful agent that can scrape the website for information about a company.]
-- **`web_search_agent.as_tool`** — [sub-agent wrapping: A helpful agent that can answer questions about the companies, such as news, articles, and social media.]
-
-## Repo 11: `khaoss85/AI-Team-Orchestrator`
-
-- **Framework:** openai-agents
-- **Pinned SHA:** `cbdd9d9f87da97f8ce07346f5edf1dced55f1232`
-- **Agent definitions found:** 5 total; 0 with tool lists; 0 shown
-  _(Note: 5 agent definitions with no `tools=[...]` argument omitted — not auditable for IG001.)_
+## Repo 08: `yuriwa/crewai-sheets-ui`
+
+- **Framework:** crewai
+- **Pinned SHA:** `46ee39143ff99052c29d1dc9805133c2de81dd25`
+- **Agent definitions found:** 1 total; 0 with tool lists; 0 shown
+  _(Note: 1 agent definitions with no `tools=[...]` argument omitted — not auditable for IG001.)_
 
 _No agents with resolvable tool lists found in this repo._
 
-## Repo 12: `evalops/agent-harness`
+## Repo 09: `NanGePlus/CrewAITest`
 
-- **Framework:** openai-agents
-- **Pinned SHA:** `8f11a6dc33f69f5e7199490d53dcefa318d52d1d`
-- **Agent definitions found:** 1 total; 0 with tool lists; 0 shown
-  _(Note: 1 agent definitions with no `tools=[...]` argument omitted — not auditable for IG001.)_
+- **Framework:** crewai
+- **Pinned SHA:** `17ee7bf1d0799172ae5dffbec34975eb17aed88d`
+- **Agent definitions found:** 24 total; 12 with tool lists; 12 shown
+  _(Note: 12 agent definitions with no `tools=[...]` argument omitted — not auditable for IG001.)_
+
+### Agent 09.1: `Agent`
+
+- **Definition:** `crewAIWithHumanFeedback/crew.py:54`
+- **Human gate:** none detected
+
+**Tools (2):**
+
+- **`<SerperDevTool(...)>`** — Web search via Serper.dev API — returns Google search results for a query.
+- **`<ScrapeWebsiteTool(...)>`** — Fetches and returns the text content of a given URL.
+
+### Agent 09.2: `Agent`
+
+- **Definition:** `crewAIWithHumanFeedback/crew.py:63`
+- **Human gate:** none detected
+
+**Tools (2):**
+
+- **`<SerperDevTool(...)>`** — Web search via Serper.dev API — returns Google search results for a query.
+- **`<ScrapeWebsiteTool(...)>`** — Fetches and returns the text content of a given URL.
+
+### Agent 09.3: `Agent`
+
+- **Definition:** `crewAIWithPipelines/crewPipeline.py:46`
+- **Human gate:** none detected
+
+**Tools (2):**
+
+- **`<SerperDevTool(...)>`** — Web search via Serper.dev API — returns Google search results for a query.
+- **`<ScrapeWebsiteTool(...)>`** — Fetches and returns the text content of a given URL.
+
+### Agent 09.4: `Agent`
+
+- **Definition:** `crewAIWithPipelines/crewPipeline.py:55`
+- **Human gate:** none detected
+
+**Tools (2):**
+
+- **`<SerperDevTool(...)>`** — Web search via Serper.dev API — returns Google search results for a query.
+- **`<ScrapeWebsiteTool(...)>`** — Fetches and returns the text content of a given URL.
+
+### Agent 09.5: `Agent`
+
+- **Definition:** `crewAIWithPipelines/crew.py:31`
+- **Human gate:** none detected
+
+**Tools (2):**
+
+- **`<SerperDevTool(...)>`** — Web search via Serper.dev API — returns Google search results for a query.
+- **`<ScrapeWebsiteTool(...)>`** — Fetches and returns the text content of a given URL.
+
+### Agent 09.6: `Agent`
+
+- **Definition:** `crewAIWithPipelines/crew.py:40`
+- **Human gate:** none detected
+
+**Tools (2):**
+
+- **`<SerperDevTool(...)>`** — Web search via Serper.dev API — returns Google search results for a query.
+- **`<ScrapeWebsiteTool(...)>`** — Fetches and returns the text content of a given URL.
+
+### Agent 09.7: `Agent`
+
+- **Definition:** `crewAIWithMarketingStrategy/crew.py:54`
+- **Human gate:** none detected
+
+**Tools (2):**
+
+- **`<SerperDevTool(...)>`** — Web search via Serper.dev API — returns Google search results for a query.
+- **`<ScrapeWebsiteTool(...)>`** — Fetches and returns the text content of a given URL.
+
+### Agent 09.8: `Agent`
+
+- **Definition:** `crewAIWithMarketingStrategy/crew.py:63`
+- **Human gate:** none detected
+
+**Tools (2):**
+
+- **`<SerperDevTool(...)>`** — Web search via Serper.dev API — returns Google search results for a query.
+- **`<ScrapeWebsiteTool(...)>`** — Fetches and returns the text content of a given URL.
+
+### Agent 09.9: `Agent`
+
+- **Definition:** `crewAIWithRag/crew.py:31`
+- **Human gate:** none detected
+
+**Tools (1):**
+
+- **`vectorSearch`** — global CHROMADB_COLLECTION_NAME
+
+### Agent 09.10: `Agent`
+
+- **Definition:** `crewAIWithRag/crew.py:40`
+- **Human gate:** none detected
+
+**Tools (1):**
+
+- **`saveText2Pdf`** — 使用这个工具来保存任务输出为PDF文件，支持中文。
+
+### Agent 09.11: `Agent`
+
+- **Definition:** `crewAIWithFlows/crews/marketAnalystCrew/marketAnalystCrew.py:29`
+- **Human gate:** none detected
+
+**Tools (2):**
+
+- **`<SerperDevTool(...)>`** — Web search via Serper.dev API — returns Google search results for a query.
+- **`<ScrapeWebsiteTool(...)>`** — Fetches and returns the text content of a given URL.
+
+### Agent 09.12: `Agent`
+
+- **Definition:** `crewAIWithFlows/crews/contentCreatorCrew/contentCreatorCrew.py:30`
+- **Human gate:** none detected
+
+**Tools (2):**
+
+- **`<SerperDevTool(...)>`** — Web search via Serper.dev API — returns Google search results for a query.
+- **`<ScrapeWebsiteTool(...)>`** — Fetches and returns the text content of a given URL.
+
+## Repo 10: `tonykipkemboi/crewai-streamlit-demo`
+
+- **Framework:** crewai
+- **Pinned SHA:** `653549a53d3c085471405c5952d9258045a0f056`
+- **Agent definitions found:** 1 total; 1 with tool lists; 1 shown
+
+### Agent 10.1: `Research Analyst`
+
+- **Definition:** `src/components/researcher.py:108`
+- **Human gate:** none detected
+
+**Tools (1):**
+
+- **`<EXAAnswerTool(...)>`** — A tool that asks Exa a question and returns the answer.
+
+## Repo 11: `liangdabiao/easy_investment_Agent_crewai`
+
+- **Framework:** crewai
+- **Pinned SHA:** `ec73a6cb337ff8d6d18040c4893efe16bada5df3`
+- **Agent definitions found:** 8 total; 4 with tool lists; 4 shown
+  _(Note: 4 agent definitions with no `tools=[...]` argument omitted — not auditable for IG001.)_
+
+### Agent 11.1: `Agent`
+
+- **Definition:** `stock_analysis_a_stock/src/a_stock_analysis/crew.py:45`
+- **Human gate:** none detected
+
+**Tools (3):**
+
+- **`<AStockDataTool(...)>`** — 获取A股和港股的实时行情、历史数据、财务信息等，支持上交所、深交所和港股
+- **`<FinancialAnalysisTool(...)>`** — 深度分析A股公司财务报表，包括财务比率、趋势分析和同业对比
+- **`<CalculatorTool(...)>`** — Useful to perform any mathematical calculations, like sum, minus, multiplication, division, etc. The input to this tool should be a mathematical  expression, a couple examples are `200*7` or `5000/2*10.
+
+### Agent 11.2: `Agent`
+
+- **Definition:** `stock_analysis_a_stock/src/a_stock_analysis/crew.py:65`
+- **Human gate:** none detected
+
+**Tools (3):**
+
+- **`<AStockDataTool(...)>`** — 获取A股和港股的实时行情、历史数据、财务信息等，支持上交所、深交所和港股
+- **`<FinancialAnalysisTool(...)>`** — 深度分析A股公司财务报表，包括财务比率、趋势分析和同业对比
+- **`<CalculatorTool(...)>`** — Useful to perform any mathematical calculations, like sum, minus, multiplication, division, etc. The input to this tool should be a mathematical  expression, a couple examples are `200*7` or `5000/2*10.
+
+### Agent 11.3: `Agent`
+
+- **Definition:** `stock_analysis_a_stock/src/a_stock_analysis/crew.py:85`
+- **Human gate:** none detected
+
+**Tools (2):**
+
+- **`<AStockDataTool(...)>`** — 获取A股和港股的实时行情、历史数据、财务信息等，支持上交所、深交所和港股
+- **`<MarketSentimentTool(...)>`** — 分析A股市场情绪，包括资金流向、新闻情绪和技术情绪
+
+### Agent 11.4: `Agent`
+
+- **Definition:** `stock_analysis_a_stock/src/a_stock_analysis/crew.py:104`
+- **Human gate:** none detected
+
+**Tools (1):**
+
+- **`<CalculatorTool(...)>`** — Useful to perform any mathematical calculations, like sum, minus, multiplication, division, etc. The input to this tool should be a mathematical  expression, a couple examples are `200*7` or `5000/2*10.
+
+## Repo 12: `Andrew-Tsegaye/Advanced-AI-Code-Generation-Agent`
+
+- **Framework:** llama-index
+- **Pinned SHA:** `0fb975afba4e2858ad9124cdf0ebe935e64614bd`
+- **Agent definitions found:** 0 total; 0 with tool lists; 0 shown
 
 _No agents with resolvable tool lists found in this repo._
 
