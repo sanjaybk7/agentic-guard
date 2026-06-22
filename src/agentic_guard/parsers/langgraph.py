@@ -3,6 +3,10 @@
 Recognizes:
   - Functions decorated with `@tool` from langchain_core.tools / langchain.tools
   - `create_react_agent(...)` calls (and similar agent factories) from langgraph.prebuilt
+  - Tools listed in `tools=[...]` by direct extraction (mirrors CrewAI/LlamaIndex):
+    ast.Name (plain function or variable), ast.Attribute, and ast.Call
+    (class instantiations like `TavilySearch()`). A pre-registered `@tool`
+    function is reused for its metadata; everything else is classified by name.
   - System prompts / instructions passed via `prompt=` or `state_modifier=` args
   - Human-approval gates via `interrupt_before=[...]` / `interrupt_after=[...]`
 
@@ -189,8 +193,7 @@ class _Visitor(ast.NodeVisitor):
             end_column=getattr(node, "end_col_offset", None),
         )
 
-        tool_names = self._extract_tool_names(node)
-        agent_tools = [self._tools_by_name[n] for n in tool_names if n in self._tools_by_name]
+        agent_tools = self._extract_tools(node)
 
         prompt_loc, prompt_dynamic, prompt_taint = self._analyze_prompt(node)
         interrupts_before = self._extract_string_list(node, "interrupt_before")
@@ -209,27 +212,87 @@ class _Visitor(ast.NodeVisitor):
         )
         self.agents.append(agent)
 
-    def _extract_tool_names(self, node: ast.Call) -> list[str]:
-        tools_arg: ast.expr | None = None
+    def _find_tools_arg(self, node: ast.Call) -> ast.expr | None:
         for kw in node.keywords:
             if kw.arg == "tools":
-                tools_arg = kw.value
-                break
-        if tools_arg is None:
-            for arg in node.args:
-                if isinstance(arg, (ast.List, ast.Tuple, ast.Set)):
-                    tools_arg = arg
-                    break
+                return kw.value
+        for arg in node.args:
+            if isinstance(arg, (ast.List, ast.Tuple, ast.Set)):
+                return arg
+        return None
+
+    def _extract_tools(self, node: ast.Call) -> list[Tool]:
+        """Extract tools directly from the ``tools=[...]`` list elements.
+
+        Mirrors the CrewAI/LlamaIndex direct-extraction approach: every list
+        element is turned into a Tool by its identity, regardless of whether
+        the underlying callable is ``@tool``-decorated in this file. A
+        decorated tool that was pre-registered is reused (it carries the
+        docstring-derived description); anything else — a plain undecorated
+        function, a class instance, or a name imported from elsewhere — is
+        classified directly by name via the taxonomy.
+        """
+        tools_arg = self._find_tools_arg(node)
         if not isinstance(tools_arg, (ast.List, ast.Tuple, ast.Set)):
             return []
 
-        names: list[str] = []
+        result: list[Tool] = []
         for elt in tools_arg.elts:
-            if isinstance(elt, ast.Name):
-                names.append(elt.id)
-            elif isinstance(elt, ast.Attribute):
-                names.append(elt.attr)
-        return names
+            tool = self._tool_from_element(elt)
+            if tool is not None:
+                result.append(tool)
+        return result
+
+    def _tool_from_element(self, elt: ast.expr) -> Tool | None:
+        tool_name: str | None = None
+        if isinstance(elt, ast.Name):
+            tool_name = elt.id
+        elif isinstance(elt, ast.Attribute):
+            tool_name = elt.attr
+        elif isinstance(elt, ast.Call):
+            # Class instantiation: TavilySearch(), create_handoff_tool(...) →
+            # the callee's base name.
+            tool_name = call_base_name(elt)
+        # else: starred unpack, runtime expression — skip.
+        if tool_name is None:
+            return None
+
+        # Prefer a pre-registered @tool-decorated tool: richer metadata.
+        registered = self._tools_by_name.get(tool_name)
+        if registered is not None:
+            return registered
+
+        return self._make_tool_from_name(tool_name, elt)
+
+    def _make_tool_from_name(self, tool_name: str, elt: ast.expr) -> Tool:
+        loc = SourceLocation(
+            file=self.path,
+            line=elt.lineno,
+            column=elt.col_offset,
+            end_line=getattr(elt, "end_lineno", None),
+            end_column=getattr(elt, "end_col_offset", None),
+        )
+        entry = self.taxonomy.classify(tool_name, None)
+        if entry is None:
+            tool = Tool(
+                name=tool_name,
+                location=loc,
+                classification=ToolClassification.NEUTRAL,
+            )
+        else:
+            tool = Tool(
+                name=tool_name,
+                location=loc,
+                classification=entry.classification,
+                privilege=entry.privilege,
+                trust_of_output=entry.trust_of_output,
+                reversible=entry.reversible,
+                matched_pattern=entry.pattern,
+            )
+        # Count freshly-extracted tools toward tools_seen. Pre-registered
+        # decorated tools are already in self.tools and are not re-added.
+        self.tools.append(tool)
+        return tool
 
     def _analyze_prompt(
         self, node: ast.Call

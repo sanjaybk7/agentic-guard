@@ -3,6 +3,11 @@
 Recognizes:
   - Functions decorated with `@function_tool` from the `agents` package
   - `Agent(...)` constructor calls (when the file imports from `agents`)
+  - Tools listed in `tools=[...]` by direct extraction (mirrors CrewAI/LlamaIndex):
+    ast.Name (plain function or variable), ast.Attribute, and ast.Call
+    (hosted tool class instances like `WebSearchTool()`). A pre-registered
+    `@function_tool` is reused for its metadata; everything else is classified
+    by name.
   - System prompts via `instructions=` arg
   - Human-approval gates:
       * `tool_use_behavior="stop_on_first_tool"` — gates ALL sinks (loop halts after one call)
@@ -203,8 +208,7 @@ class _Visitor(ast.NodeVisitor):
             end_column=getattr(node, "end_col_offset", None),
         )
 
-        tool_names = self._extract_tool_names(node)
-        agent_tools = [self._tools_by_name[n] for n in tool_names if n in self._tools_by_name]
+        agent_tools = self._extract_tools(node)
 
         prompt_loc, prompt_dynamic, prompt_taint = self._analyze_prompt(node)
         gates_all_sinks, gated_tool_names = self._analyze_tool_use_behavior(node)
@@ -214,9 +218,9 @@ class _Visitor(ast.NodeVisitor):
             for t in agent_tools:
                 if t.is_sink:
                     t.requires_approval = True
-        for name in gated_tool_names:
-            if name in self._tools_by_name:
-                self._tools_by_name[name].requires_approval = True
+        for t in agent_tools:
+            if t.name in gated_tool_names:
+                t.requires_approval = True
 
         agent_name = self._extract_string(node, "name") or "Agent"
         agent = Agent(
@@ -231,7 +235,16 @@ class _Visitor(ast.NodeVisitor):
         )
         self.agents.append(agent)
 
-    def _extract_tool_names(self, node: ast.Call) -> list[str]:
+    def _extract_tools(self, node: ast.Call) -> list[Tool]:
+        """Extract tools directly from the ``tools=[...]`` list elements.
+
+        Mirrors the CrewAI/LlamaIndex direct-extraction approach: every list
+        element becomes a Tool by its identity. A pre-registered
+        ``@function_tool`` is reused (it carries the docstring/override-derived
+        description and any ``is_enabled`` gate); anything else — a plain
+        undecorated function or a hosted tool class instance like
+        ``WebSearchTool()`` — is classified directly by name via the taxonomy.
+        """
         tools_arg: ast.expr | None = None
         for kw in node.keywords:
             if kw.arg == "tools":
@@ -239,13 +252,62 @@ class _Visitor(ast.NodeVisitor):
                 break
         if not isinstance(tools_arg, (ast.List, ast.Tuple, ast.Set)):
             return []
-        names: list[str] = []
+        result: list[Tool] = []
         for elt in tools_arg.elts:
-            if isinstance(elt, ast.Name):
-                names.append(elt.id)
-            elif isinstance(elt, ast.Attribute):
-                names.append(elt.attr)
-        return names
+            tool = self._tool_from_element(elt)
+            if tool is not None:
+                result.append(tool)
+        return result
+
+    def _tool_from_element(self, elt: ast.expr) -> Tool | None:
+        tool_name: str | None = None
+        if isinstance(elt, ast.Name):
+            tool_name = elt.id
+        elif isinstance(elt, ast.Attribute):
+            tool_name = elt.attr
+        elif isinstance(elt, ast.Call):
+            # Hosted tool class instance: WebSearchTool(), FileSearchTool() →
+            # the callee's base name.
+            tool_name = call_base_name(elt)
+        # else: starred unpack, runtime expression — skip.
+        if tool_name is None:
+            return None
+
+        registered = self._tools_by_name.get(tool_name)
+        if registered is not None:
+            return registered
+
+        return self._make_tool_from_name(tool_name, elt)
+
+    def _make_tool_from_name(self, tool_name: str, elt: ast.expr) -> Tool:
+        loc = SourceLocation(
+            file=self.path,
+            line=elt.lineno,
+            column=elt.col_offset,
+            end_line=getattr(elt, "end_lineno", None),
+            end_column=getattr(elt, "end_col_offset", None),
+        )
+        entry = self.taxonomy.classify(tool_name, None)
+        if entry is None:
+            tool = Tool(
+                name=tool_name,
+                location=loc,
+                classification=ToolClassification.NEUTRAL,
+            )
+        else:
+            tool = Tool(
+                name=tool_name,
+                location=loc,
+                classification=entry.classification,
+                privilege=entry.privilege,
+                trust_of_output=entry.trust_of_output,
+                reversible=entry.reversible,
+                matched_pattern=entry.pattern,
+            )
+        # Count freshly-extracted tools toward tools_seen. Pre-registered
+        # decorated tools are already in self.tools and are not re-added.
+        self.tools.append(tool)
+        return tool
 
     def _extract_string(self, node: ast.Call, kw_name: str) -> str | None:
         for kw in node.keywords:
