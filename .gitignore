@@ -20,6 +20,9 @@ out/
 .vscode-test/
 .DS_Store
 
+# Eval corpus clones — large, not tracked
+eval/repos/
+
 # Editor / agent local state — user-specific, not project files
 .claude/
 .idea/
